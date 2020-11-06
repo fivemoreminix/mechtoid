@@ -1,3 +1,53 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/Boundary.gd" type="Script" id=2]
+[ext_resource path="res://assets/graphics/backgrounds/ivana-cajina-asuyh-_ZX54-unsplash.jpg" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46, 434.872 )
 
 [node name="Game" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TopPlayer" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 90 )
+facing_down = true
+
+[node name="BottomPlayer" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 630 )
+
+[node name="LeftBoundary" type="Area2D" parent="." groups=[
+"boundary",
+]]
+position = Vector2( 0, 359.274 )
+monitoring = false
+script = ExtResource( 2 )
+side = "left"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RightBoundary" type="Area2D" parent="." groups=[
+"boundary",
+]]
+position = Vector2( 1281.22, 354.641 )
+monitoring = false
+script = ExtResource( 2 )
+side = "right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
