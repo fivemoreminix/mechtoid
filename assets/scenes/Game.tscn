@@ -24,6 +24,12 @@ position = Vector2( 90, 360 )
 position = Vector2( 1190, 360 )
 facing_opposite = true
 
+[node name="Sprite" parent="RightPlayer" index="0"]
+flip_v = true
+
+[node name="CollisionShape2D" parent="RightPlayer" index="1"]
+position = Vector2( 14, 1 )
+
 [node name="TopBoundary" type="Area2D" parent="." groups=[
 "boundary",
 ]]
@@ -53,3 +59,5 @@ shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[editable path="RightPlayer"]
