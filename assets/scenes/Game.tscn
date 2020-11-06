@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/graphics/backgrounds/ivana-cajina-asuyh-_ZX54-unsplash.jpg" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 46, 434.872 )
+extents = Vector2( 46, 739.09 )
 
 [node name="Game" type="Node2D"]
 
@@ -17,36 +17,38 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TopPlayer" parent="." instance=ExtResource( 1 )]
-position = Vector2( 640, 90 )
-facing_down = true
+[node name="LeftPlayer" parent="." instance=ExtResource( 1 )]
+position = Vector2( 90, 360 )
 
-[node name="BottomPlayer" parent="." instance=ExtResource( 1 )]
-position = Vector2( 640, 630 )
+[node name="RightPlayer" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1190, 360 )
+facing_opposite = true
 
-[node name="LeftBoundary" type="Area2D" parent="." groups=[
+[node name="TopBoundary" type="Area2D" parent="." groups=[
 "boundary",
 ]]
-position = Vector2( 0, 359.274 )
+position = Vector2( 637.2, 0.511963 )
+rotation = 1.57079
 monitoring = false
 script = ExtResource( 2 )
-side = "left"
+side = "up"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBoundary"]
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RightBoundary" type="Area2D" parent="." groups=[
+[node name="BottomBoundary" type="Area2D" parent="." groups=[
 "boundary",
 ]]
-position = Vector2( 1281.22, 354.641 )
+position = Vector2( 637.224, 717.053 )
+rotation = 1.57079
 monitoring = false
 script = ExtResource( 2 )
-side = "right"
+side = "down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBoundary"]
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true

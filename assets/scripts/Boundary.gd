@@ -1,6 +1,6 @@
 extends Area2D
 
-export(String, "unassigned", "left", "right") var side
+export(String, "unassigned", "up", "down") var side
 
 func _ready():
-	assert(side == "left" or side == "right")
+	assert(side == "up" or side == "down")

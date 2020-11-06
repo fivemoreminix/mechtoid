@@ -4,20 +4,20 @@ extends Area2D
 const MOVE_SPEED = 350
 export(float, EXP, 0.0, 1.0) var acceleration
 
-export var facing_down: bool = false setget set_facing
+export var facing_opposite: bool = false setget set_facing
 export var is_ai: bool = false # TODO: probably just make the AI controller a child node
 
 # For use with boundaries (to keep ships from going off screen)
 # In global direction, not local
-var can_move_left: bool = true
-var can_move_right: bool = true
+var can_move_up: bool = true
+var can_move_down: bool = true
 
 var motion = Vector2()
 
-
-func set_facing(is_down: bool) -> void:
-	facing_down = is_down
-	if $Sprite != null: $Sprite.flip_v = is_down
+# Change the direction this player is facing
+func set_facing(opposite: bool) -> void:
+	facing_opposite = opposite
+	if $Sprite != null: $Sprite.flip_h = opposite
 
 
 func _ready():
@@ -29,14 +29,14 @@ func _ready():
 func _physics_process(delta):
 	var m = Vector2()
 	
-#	if Input.is_action_pressed("up"):
-#		motion.y -= 1
-#	if Input.is_action_pressed("down"):
-#		motion.y += 1
-	if Input.is_action_pressed("left") and can_move_left:
-		m.x -= 1
-	if Input.is_action_pressed("right") and can_move_right:
-		m.x += 1
+	if Input.is_action_pressed("up") and can_move_up:
+		m.y -= 1
+	if Input.is_action_pressed("down") and can_move_down:
+		m.y += 1
+#	if Input.is_action_pressed("left"):
+#		m.x -= 1
+#	if Input.is_action_pressed("right"):
+#		m.x += 1
 	
 	move(m.normalized(), delta)
 
@@ -57,15 +57,15 @@ func move(m: Vector2, delta: float) -> void:
 func on_boundary(area: Node, entering: bool) -> void:
 	# See Boundary.gd
 	if entering:
-		if area.side == "left": # Disallow movement in the direction of the boundary
-			can_move_left = false
-		if area.side == "right":
-			can_move_right = false
+		if area.side == "up": # Disallow movement in the direction of the boundary
+			can_move_up = false
+		if area.side == "down":
+			can_move_down = false
 	else:
-		if area.side == "left": # Re-enable movement in the direction of the boundary
-			can_move_left = true
-		if area.side == "right":
-			can_move_right = true
+		if area.side == "up": # Re-enable movement in the direction of the boundary
+			can_move_up = true
+		if area.side == "down":
+			can_move_down = true
 
 
 func _on_area_entered(area):
