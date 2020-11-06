@@ -1,7 +1,8 @@
 tool
 extends Area2D
 
-const MOVE_SPEED = 500
+const MOVE_SPEED = 350
+export(float, EXP, 0.0, 1.0) var acceleration
 
 export var facing_down: bool = false setget set_facing
 export var is_ai: bool = false # TODO: probably just make the AI controller a child node
@@ -10,6 +11,8 @@ export var is_ai: bool = false # TODO: probably just make the AI controller a ch
 # In global direction, not local
 var can_move_left: bool = true
 var can_move_right: bool = true
+
+var motion = Vector2()
 
 
 func set_facing(is_down: bool) -> void:
@@ -23,24 +26,31 @@ func _ready():
 	set_physics_process(true)
 
 
-func _physics_process(_delta):
-	var motion = Vector2()
+func _physics_process(delta):
+	var m = Vector2()
 	
 #	if Input.is_action_pressed("up"):
 #		motion.y -= 1
 #	if Input.is_action_pressed("down"):
 #		motion.y += 1
 	if Input.is_action_pressed("left") and can_move_left:
-		motion.x -= 1
+		m.x -= 1
 	if Input.is_action_pressed("right") and can_move_right:
-		motion.x += 1
+		m.x += 1
 	
-	move(motion)
+	move(m.normalized(), delta)
 
 
-# Move the player in the given direction. Assumes `motion` is global and not normalized.
-func move(motion: Vector2) -> void:
-	position += motion.normalized() * get_physics_process_delta_time() * MOVE_SPEED
+# Move the player in the given direction. Assumes `m` is global and normalized.
+# `delta` must be the _physics_process delta time.
+func move(m: Vector2, delta: float) -> void:
+	# Ease actual move speed toward motion out of max move speed
+	var target_speed = m * Vector2(MOVE_SPEED, MOVE_SPEED)
+	motion = Vector2(
+		lerp(motion.x, target_speed.x, acceleration),
+		lerp(motion.y, target_speed.y, acceleration)
+	)
+	position += motion * delta
 
 
 # on_boundary handles when a ship hits a boundary on either the left or right side.
