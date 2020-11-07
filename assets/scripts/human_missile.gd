@@ -19,4 +19,4 @@ func move(target_node, phys_delta):
 	m.position += m.transform.basis_xform(Vector2.RIGHT) * speed * phys_delta
 	# Apply sinoid wave
 	var up = m.transform.basis_xform(Vector2.UP)
-	m.position += up * sin(Engine.get_frames_drawn() / 5.0) * 1
+	m.position += up * sin(Engine.get_frames_drawn() / 5.0)
