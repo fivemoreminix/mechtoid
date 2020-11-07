@@ -1,6 +1,8 @@
 tool
 extends Area2D
 
+var missile: PackedScene = preload("res://assets/scenes/missiles/Missile.tscn")
+
 const MOVE_SPEED = 350
 export(float, EXP, 0.0, 1.0) var acceleration
 
@@ -17,13 +19,21 @@ var motion = Vector2()
 # Change the direction this player is facing
 func set_facing(opposite: bool) -> void:
 	facing_opposite = opposite
-	if $Sprite != null: $Sprite.flip_h = opposite
+	if $Sprite != null:
+		$Sprite.flip_h = opposite
+		$Sprite.flip_v = opposite
 
 
 func _ready():
 	if Engine.editor_hint:
 		return # We don't want to do any processing in the editor (caused by tool mode)
+	set_process(true)
 	set_physics_process(true)
+
+
+func _process(_delta):
+	if Input.is_action_just_pressed("fire_missile"):
+		shoot_missile()
 
 
 func _physics_process(delta):
@@ -66,6 +76,15 @@ func on_boundary(area: Node, entering: bool) -> void:
 			can_move_up = true
 		if area.side == "down":
 			can_move_down = true
+
+
+func shoot_missile():
+	var m = missile.instance()
+	m.set_inner_scene(preload("res://assets/scenes/missiles/HumanMissile.tscn"))
+	m.set_owner(self)
+	get_tree().root.add_child(m)
+	m.global_position = $MissileSpawn.global_position
+	m.set_direction(Vector2.LEFT if facing_opposite else Vector2.RIGHT)
 
 
 func _on_area_entered(area):
