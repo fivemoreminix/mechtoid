@@ -90,8 +90,9 @@ func shoot_missile():
 	m.set_owner(self)
 	get_tree().root.add_child(m)
 	m.target_node = get_opponent_node()
-	m.global_position = $MissileSpawn.global_position
-	m.look_at(m.to_global(Vector2.LEFT if facing_opposite else Vector2.RIGHT))
+	m.global_position = global_position
+	m.look_at($MissileSpawn.global_position)
+#	m.look_at(m.to_global(Vector2.LEFT if facing_opposite else Vector2.RIGHT))
 
 
 func _on_area_entered(area):

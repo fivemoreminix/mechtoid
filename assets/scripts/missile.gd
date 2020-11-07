@@ -26,7 +26,7 @@ func set_inner_scene(scn: PackedScene) -> void:
 # Not necessarily the parent of this node.
 var owning_node: Node setget set_owner, get_owner
 # direction is global and normalized.
-var target_node: Node
+var target_node: Node setget set_target
 
 
 func set_owner(new: Node) -> void:
@@ -34,6 +34,9 @@ func set_owner(new: Node) -> void:
 
 func get_owner() -> Node:
 	return owning_node
+
+func set_target(new: Node) -> void:
+	target_node = new
 
 
 func _ready() -> void:

@@ -20,3 +20,18 @@ func move(target_node, phys_delta):
 	# Apply sinoid wave
 	var up = m.transform.basis_xform(Vector2.UP)
 	m.position += up * sin(Engine.get_frames_drawn() / 5.0)
+
+
+# get_damage() returns a number between 0.0 and 1.0 determining how much
+# damage the missile should do.
+func get_damage() -> float:
+	return (bounces / float(max_bounces)) * 1.0
+
+
+func can_deflect() -> bool:
+	return bounces < max_bounces
+
+
+# Let the missile know it got deflected
+func deflected() -> void:
+	bounces += 1

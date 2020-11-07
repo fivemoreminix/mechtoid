@@ -3,6 +3,8 @@
 [ext_resource path="res://assets/scripts/missile.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/missiles/HumanMissile.tscn" type="PackedScene" id=2]
 
-[node name="Missile" type="Area2D"]
+[node name="Missile" type="Area2D" groups=[
+"missile",
+]]
 script = ExtResource( 1 )
 inner_missile_scene = ExtResource( 2 )
