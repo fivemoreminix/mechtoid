@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/scripts/human_missile.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -6,13 +6,27 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.75, 16 )
 
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.71313, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
 [sub_resource type="ParticlesMaterial" id=2]
 flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 16.03
 gravity = Vector3( 0, 0, 0 )
+initial_velocity = 34.48
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+scale = 8.0
+scale_random = 0.65
+scale_curve = SubResource( 4 )
+color = Color( 1, 1, 1, 0.572549 )
 
 [node name="HumanMissile" type="CollisionShape2D"]
+rotation = 1.57079
 shape = SubResource( 1 )
 script = ExtResource( 1 )
 
@@ -22,5 +36,8 @@ scale = Vector2( 0.2, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( -1.90735e-05, 8 )
+amount = 20
+lifetime = 0.5
 local_coords = false
 process_material = SubResource( 2 )
