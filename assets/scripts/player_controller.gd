@@ -78,13 +78,20 @@ func on_boundary(area: Node, entering: bool) -> void:
 			can_move_down = true
 
 
+func get_opponent_node():
+	for player in get_tree().get_nodes_in_group("player"):
+		if player != self: return player
+	assert(false)
+
+
 func shoot_missile():
 	var m = missile.instance()
 	m.set_inner_scene(preload("res://assets/scenes/missiles/HumanMissile.tscn"))
 	m.set_owner(self)
 	get_tree().root.add_child(m)
+	m.target_node = get_opponent_node()
 	m.global_position = $MissileSpawn.global_position
-	m.set_direction(Vector2.LEFT if facing_opposite else Vector2.RIGHT)
+	m.look_at(m.to_global(Vector2.LEFT if facing_opposite else Vector2.RIGHT))
 
 
 func _on_area_entered(area):
