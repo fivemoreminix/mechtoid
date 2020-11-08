@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/scripts/PlayerShield.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-<<<<<<< HEAD
 extents = Vector2( 32.5, 40 )
 
 [sub_resource type="Shader" id=2]
@@ -23,9 +22,6 @@ shader = SubResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 12.3623, 46.75 )
-=======
-extents = Vector2( 33.8327, 38.5625 )
->>>>>>> ec7f766649aaf9018fedf0887b0d3fb2252847d8
 
 [node name="Player" type="Area2D" groups=[
 "player",
@@ -43,7 +39,6 @@ position = Vector2( -5, 0 )
 shape = SubResource( 1 )
 
 [node name="MissileSpawn" type="Position2D" parent="."]
-<<<<<<< HEAD
 position = Vector2( 0, 8.8185 )
 
 [node name="Shield" type="Area2D" parent="."]
@@ -58,9 +53,7 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shield"]
 position = Vector2( 1.38775, 0 )
 shape = SubResource( 4 )
-=======
-position = Vector2( 6, 31 )
->>>>>>> ec7f766649aaf9018fedf0887b0d3fb2252847d8
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Player_area_exited"]
 [connection signal="area_entered" from="Shield" to="Shield" method="_on_area_entered"]
