@@ -3,6 +3,8 @@ extends Area2D
 
 var missile: PackedScene = preload("res://assets/scenes/missiles/Missile.tscn")
 
+export(String, "human", "alien") var kind = "human" setget set_kind
+
 const MOVE_SPEED = 350
 export(float, EXP, 0.0, 1.0) var acceleration
 
@@ -12,6 +14,13 @@ var can_move_up: bool = true
 var can_move_down: bool = true
 
 var motion = Vector2()
+
+
+func set_kind(v: String) -> void:
+	kind = v
+	match v:
+		"human": $Sprite.texture = load("res://assets/Robots/robot.png")
+		"alien": $Sprite.texture = load("res://assets/Robots/AlienRobot.png")
 
 
 func _ready():

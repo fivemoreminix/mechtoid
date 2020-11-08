@@ -19,10 +19,12 @@ __meta__ = {
 
 [node name="LeftPlayer" parent="." instance=ExtResource( 1 )]
 position = Vector2( 90, 360 )
+kind = "Human"
 
 [node name="RightPlayer" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1190, 360 )
 rotation = 3.14159
+kind = "alien"
 
 [node name="TopBoundary" type="Area2D" parent="." groups=[
 "boundary",
