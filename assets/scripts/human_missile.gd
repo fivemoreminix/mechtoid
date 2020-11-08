@@ -22,9 +22,16 @@ func move(target_node, phys_delta):
 	m.position += up * sin(Engine.get_frames_drawn() / 5.0)
 
 
-# get_damage() returns a number between 0.0 and 1.0 determining how much
-# damage the missile should do.
-func get_damage() -> float:
+# explode() returns a number between 0.0 and 1.0 determining how much
+# damage the missile should do. It also performs an animation before freeing
+# the parent node.
+# NOTE: Was previously known as "get_damage()"
+func explode() -> float:
+	# TODO: an animation
+	# TODO: could probably do a great, negative gravity on this Area2D to simulate physical force
+	# TODO: timer / end of animation we get_parent().queue_free()
+	get_parent().queue_free() # ... for now ;)
+	
 	# + 1 because if it hasn't bounced it must still do damage
 	return (bounces / float(max_bounces) + 1)
 

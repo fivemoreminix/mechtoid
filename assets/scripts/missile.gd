@@ -52,8 +52,9 @@ func _physics_process(delta) -> void:
 
 
 # Returns an amount of damage from 0.0 to 1.0
-func get_damage() -> float:
-	return inner.get_damage()
+# NOTE: Was previously known as "get_damage()"
+func explode() -> float:
+	return inner.explode()
 
 
 # Returns if the missile agrees to being deflected
