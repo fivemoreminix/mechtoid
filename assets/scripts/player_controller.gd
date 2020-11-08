@@ -9,6 +9,7 @@ signal killed()
 var missile: PackedScene = preload("res://assets/scenes/missiles/Missile.tscn")
 
 export(String, "human", "alien") var kind = "human" setget set_kind
+export var is_ai_controlled: bool = false
 
 const MOVE_SPEED = 350
 export(float, EXP, 0.0, 1.0) var acceleration
@@ -35,7 +36,9 @@ func set_kind(v: String) -> void:
 func _ready():
 	if Engine.editor_hint:
 		return # We don't want to do any processing in the editor (caused by tool mode)
+	
 	set_process(true)
+	
 	set_physics_process(true)
 	
 	call_deferred("shoot_missile")
@@ -43,25 +46,21 @@ func _ready():
 	emit_signal("max_health_updated", max_health)
 
 func _process(_delta):
-	if Input.is_action_just_pressed("shield"):
-		$Shield.set_shield_enabled(true)
-	if Input.is_action_just_released("shield"):
-		$Shield.set_shield_enabled(false)
-#	if Input.is_action_just_pressed("fire_missile"):
-#		shoot_missile()
+	if not is_ai_controlled:
+		if Input.is_action_just_pressed("shield"):
+			$Shield.set_shield_enabled(true)
+		if Input.is_action_just_released("shield"):
+			$Shield.set_shield_enabled(false)
 
 
 func _physics_process(delta):
 	var m = Vector2()
 	
-	if Input.is_action_pressed("up") and can_move_up:
-		m.y -= 1
-	if Input.is_action_pressed("down") and can_move_down:
-		m.y += 1
-#	if Input.is_action_pressed("left"):
-#		m.x -= 1
-#	if Input.is_action_pressed("right"):
-#		m.x += 1
+	if not is_ai_controlled: # When this player is not controlled by an AI...
+		if Input.is_action_pressed("up") and can_move_up:
+			m.y -= 1
+		if Input.is_action_pressed("down") and can_move_down:
+			m.y += 1
 	
 	move(m.normalized(), delta)
 
@@ -140,11 +139,3 @@ func _set_health(value):
 		if health == 0:
 			die() 
 			emit_signal("killed")
-
-
-
-
-
-
-
-
