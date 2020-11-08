@@ -12,6 +12,8 @@ extends Area2D
 export var inner_missile_scene: PackedScene setget set_inner_scene
 onready var inner: Node
 
+export var damage = 150
+
 func set_inner_scene(scn: PackedScene) -> void:
 	inner_missile_scene = scn
 	if has_node("InnerMissile"):
@@ -50,7 +52,7 @@ func _physics_process(delta) -> void:
 
 # Returns an amount of damage from 0.0 to 1.0
 func get_damage() -> float:
-	return inner.get_damage()
+	return inner.get_damage() * damage
 
 
 # Returns if the missile agrees to being deflected
@@ -61,3 +63,5 @@ func can_deflect() -> bool:
 # Let the missile know it has been deflected
 func deflected() -> void:
 	inner.deflected()
+
+

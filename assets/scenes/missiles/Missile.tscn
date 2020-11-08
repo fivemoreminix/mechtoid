@@ -6,5 +6,7 @@
 [node name="Missile" type="Area2D" groups=[
 "missile",
 ]]
+collision_layer = 12
+collision_mask = 3
 script = ExtResource( 1 )
 inner_missile_scene = ExtResource( 2 )

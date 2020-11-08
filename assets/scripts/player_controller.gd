@@ -1,12 +1,21 @@
 tool
 extends Area2D
 
+# health signals for tracking the state of the obj
+signal health_updated(health)
+signal max_health_updated(max_health)
+signal killed()
+
 var missile: PackedScene = preload("res://assets/scenes/missiles/Missile.tscn")
 
 export(String, "human", "alien") var kind = "human" setget set_kind
 
 const MOVE_SPEED = 350
 export(float, EXP, 0.0, 1.0) var acceleration
+
+# Health
+export (float) var max_health = 300
+onready var health = max_health setget _set_health
 
 # For use with boundaries (to keep ships from going off screen)
 # In global direction, not local
@@ -30,7 +39,8 @@ func _ready():
 	set_physics_process(true)
 	
 	call_deferred("shoot_missile")
-
+	#changing the max health in the healthbar
+	emit_signal("max_health_updated", max_health)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("shield"):
@@ -103,8 +113,38 @@ func shoot_missile():
 func _on_area_entered(area):
 	if area.is_in_group("boundary"):
 		on_boundary(area, true)
+	elif area.is_in_group("missile"):
+		apply_damage(area.get_damage())
 
 
 func _on_Player_area_exited(area):
 	if area.is_in_group("boundary"): # If we left a boundary...
 		on_boundary(area, false)
+
+
+func apply_damage(amount):
+	_set_health(health - amount)
+
+# TODO things to do before the player dies like animations scoring points and so ....
+func die():
+	print_debug("DEAD")
+	#queue_free()
+
+
+func _set_health(value):
+	var prev_health = health
+	health = clamp(value, 0, max_health)
+	
+	if not health == prev_health:
+		emit_signal("health_updated", health)
+		if health == 0:
+			die() 
+			emit_signal("killed")
+
+
+
+
+
+
+
+
