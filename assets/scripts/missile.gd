@@ -62,8 +62,8 @@ func can_deflect() -> bool:
 	return inner.can_deflect()
 
 
-# Let the missile know it has been deflected
-func deflected() -> void:
-	inner.deflected()
+# Let the missile know it got deflected, and with a force from 0.0 to 1.0.
+func deflected(force: float) -> void:
+	inner.deflected(force)
 
 

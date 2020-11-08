@@ -48,6 +48,9 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shield"]
 position = Vector2( 3.39001, 0 )
 shape = SubResource( 3 )
+
+[node name="ForceTimer" type="Timer" parent="Shield"]
+one_shot = true
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Player_area_exited"]
 [connection signal="area_entered" from="Shield" to="Shield" method="_on_area_entered"]
