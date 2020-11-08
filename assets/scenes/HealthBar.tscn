@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/HealthBar/Over.png" type="Texture" id=1]
-[ext_resource path="res://assets/HealthBar/Under.png" type="Texture" id=2]
-[ext_resource path="res://assets/HealthBar/Progress.png" type="Texture" id=3]
+[ext_resource path="res://assets/HealthBar/progress.png" type="Texture" id=1]
+[ext_resource path="res://assets/HealthBar/over.png" type="Texture" id=2]
+[ext_resource path="res://assets/HealthBar/under.png" type="Texture" id=3]
 [ext_resource path="res://assets/scenes/HealthBar.gd" type="Script" id=4]
 
 [node name="HealthBar" type="Control"]
@@ -20,9 +20,11 @@ __meta__ = {
 margin_right = 40.0
 margin_bottom = 40.0
 value = 90.0
-texture_under = ExtResource( 2 )
-texture_over = ExtResource( 1 )
-texture_progress = ExtResource( 3 )
+texture_under = ExtResource( 3 )
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0.0352941, 0.0352941, 0.0352941, 1 )
+tint_progress = Color( 0.819608, 0.788235, 0.623529, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -30,9 +32,10 @@ __meta__ = {
 [node name="HealthBar" type="TextureProgress" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-value = 60.0
-texture_over = ExtResource( 1 )
-texture_progress = ExtResource( 3 )
+value = 8.0
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
+tint_progress = Color( 0.980392, 0.054902, 0.227451, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
