@@ -22,7 +22,7 @@ position = Vector2( 90, 360 )
 
 [node name="RightPlayer" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1190, 360 )
-facing_opposite = true
+rotation = 3.14159
 
 [node name="TopBoundary" type="Area2D" parent="." groups=[
 "boundary",

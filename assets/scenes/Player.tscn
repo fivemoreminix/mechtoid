@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/Robot/robot.png" type="Texture" id=1]
 [ext_resource path="res://assets/scripts/player_controller.gd" type="Script" id=2]
@@ -7,6 +7,18 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.3176, 21.4933 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float s = sin(TIME + UV.x / UV.y);
+	vec4 p = texture(TEXTURE, UV.xy);
+	COLOR = mix(vec4(s), p, 0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10.2512, 32.3022 )
@@ -34,6 +46,7 @@ position = Vector2( 24, 0 )
 script = ExtResource( 4 )
 
 [node name="ShieldSprite" type="Sprite" parent="Shield"]
+material = SubResource( 4 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
