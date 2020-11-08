@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/boundary.gd" type="Script" id=2]
 [ext_resource path="res://assets/graphics/backgrounds/ivana-cajina-asuyh-_ZX54-unsplash.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/Robots/AlienRobot.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 46, 739.09 )
@@ -25,6 +26,11 @@ kind = "Human"
 position = Vector2( 1190, 360 )
 rotation = 3.14159
 kind = "alien"
+
+[node name="Sprite" parent="RightPlayer" index="0"]
+texture = ExtResource( 4 )
+flip_h = true
+flip_v = true
 
 [node name="TopBoundary" type="Area2D" parent="." groups=[
 "boundary",
@@ -55,3 +61,5 @@ shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[editable path="RightPlayer"]
