@@ -28,7 +28,8 @@ func explode() -> float:
 	# TODO: an animation
 	# TODO: could probably do a great, negative gravity on this Area2D to simulate physical force
 	# TODO: timer / end of animation we get_parent().queue_free()
-	get_parent().queue_free() # ... for now ;)
+	explosion_state()
+	get_parent().exploision() # ... for now ;)
 	
 	# + 1 because if it hasn't bounced it must still do damage
 	return (bounces / float(MAX_BOUNCES) + 1)
@@ -43,3 +44,10 @@ func deflected(force: float) -> void:
 	bounces += 1
 	speed += 200.0 * force
 	# TODO: flash red when deflected to maximum (self modulate)
+
+func explosion_state():
+	$Particles2D.emitting = false
+	$Sprite.hide()
+	set_deferred("disabled", true) # to stop any non needed collisions
+	$SFX/MissileFire.stop()
+	$SFX/MissileGas.stop()

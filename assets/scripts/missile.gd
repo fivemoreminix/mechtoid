@@ -16,6 +16,7 @@ func set_inner_scene(scn: PackedScene) -> void:
 	inner_missile_scene = scn
 	if has_node("InnerMissile"):
 		$InnerMissile.queue_free()
+		
 	var m = inner_missile_scene.instance()
 	add_child(m)
 	m.name = "InnerMissile"
@@ -65,5 +66,13 @@ func can_deflect() -> bool:
 # Let the missile know it got deflected, and with a force from 0.0 to 1.0.
 func deflected(force: float) -> void:
 	inner.deflected(force)
+
+# Animation needed for the explosion
+func exploision():
+	set_physics_process(false) # to stop the missile from moving 
+
+	$Destroyed.play()
+	yield($Destroyed, "finished")
+	queue_free()
 
 

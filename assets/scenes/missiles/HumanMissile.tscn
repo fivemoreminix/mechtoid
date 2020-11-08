@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/scripts/human_missile.gd" type="Script" id=1]
 [ext_resource path="res://assets/Missiles/missile.png" type="Texture" id=2]
 [ext_resource path="res://SFX/missile_fired.wav" type="AudioStream" id=3]
+[ext_resource path="res://SFX/missile_flying_higher_pitch.wav" type="AudioStream" id=4]
+[ext_resource path="res://SFX/missile_flying_lower_pitch.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.45939, 32.3555 )
@@ -44,6 +46,19 @@ randomness = 1.0
 local_coords = false
 process_material = SubResource( 4 )
 
-[node name="Fired" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="Node" parent="."]
+
+[node name="Fired" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 3 )
+autoplay = true
+
+[node name="MissileGas" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 4 )
+volume_db = 1.5
+pitch_scale = 1.21
+autoplay = true
+
+[node name="MissileFire" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 5 )
+pitch_scale = 1.25
 autoplay = true
