@@ -3,7 +3,7 @@ extends CollisionShape2D
 const TWO_PI = 2.0 * PI
 
 const speed = 300
-const turn_speed = 2
+const turn_speed = 3
 const max_bounces = 3
 
 var bounces = 0
@@ -25,7 +25,8 @@ func move(target_node, phys_delta):
 # get_damage() returns a number between 0.0 and 1.0 determining how much
 # damage the missile should do.
 func get_damage() -> float:
-	return (bounces / float(max_bounces)) * 1.0
+	# + 1 because if it hasn't bounced it must still do damage
+	return (bounces / float(max_bounces) + 1)
 
 
 func can_deflect() -> bool:

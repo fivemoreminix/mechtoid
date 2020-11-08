@@ -113,8 +113,8 @@ func shoot_missile():
 func _on_area_entered(area):
 	if area.is_in_group("boundary"):
 		on_boundary(area, true)
-	elif area.is_in_group("missile"):
-		apply_damage(area.get_damage())
+	elif area.is_in_group("missile") and (area.get_owner() != self or area.get_target() == self):
+		apply_damage(int(area.get_damage() * 100.0))
 
 
 func _on_Player_area_exited(area):
