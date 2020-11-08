@@ -3,11 +3,10 @@ extends Area2D
 
 var missile: PackedScene = preload("res://assets/scenes/missiles/Missile.tscn")
 
+export(String, "human", "alien") var kind = "human" setget set_kind
+
 const MOVE_SPEED = 350
 export(float, EXP, 0.0, 1.0) var acceleration
-
-export var facing_opposite: bool = false setget set_facing
-export var is_ai: bool = false # TODO: probably just make the AI controller a child node
 
 # For use with boundaries (to keep ships from going off screen)
 # In global direction, not local
@@ -16,12 +15,12 @@ var can_move_down: bool = true
 
 var motion = Vector2()
 
-# Change the direction this player is facing
-func set_facing(opposite: bool) -> void:
-	facing_opposite = opposite
-	if $Sprite != null:
-		$Sprite.flip_h = opposite
-		$Sprite.flip_v = opposite
+
+func set_kind(v: String) -> void:
+	kind = v
+	match v:
+		"human": $Sprite.texture = load("res://assets/Robots/robot.png")
+		"alien": $Sprite.texture = load("res://assets/Robots/AlienRobot.png")
 
 
 func _ready():
@@ -29,11 +28,17 @@ func _ready():
 		return # We don't want to do any processing in the editor (caused by tool mode)
 	set_process(true)
 	set_physics_process(true)
+	
+	call_deferred("shoot_missile")
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("fire_missile"):
-		shoot_missile()
+	if Input.is_action_just_pressed("shield"):
+		$Shield.set_shield_enabled(true)
+	if Input.is_action_just_released("shield"):
+		$Shield.set_shield_enabled(false)
+#	if Input.is_action_just_pressed("fire_missile"):
+#		shoot_missile()
 
 
 func _physics_process(delta):
@@ -60,7 +65,7 @@ func move(m: Vector2, delta: float) -> void:
 		lerp(motion.x, target_speed.x, acceleration),
 		lerp(motion.y, target_speed.y, acceleration)
 	)
-	position += motion * delta
+	global_position += motion * delta
 
 
 # on_boundary handles when a ship hits a boundary on either the left or right side.
@@ -90,8 +95,9 @@ func shoot_missile():
 	m.set_owner(self)
 	get_tree().root.add_child(m)
 	m.target_node = get_opponent_node()
-	m.global_position = $MissileSpawn.global_position
-	m.look_at(m.to_global(Vector2.LEFT if facing_opposite else Vector2.RIGHT))
+	m.global_position = global_position
+	m.look_at($MissileSpawn.global_position)
+#	m.look_at(m.to_global(Vector2.LEFT if facing_opposite else Vector2.RIGHT))
 
 
 func _on_area_entered(area):
