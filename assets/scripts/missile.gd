@@ -12,8 +12,6 @@ extends Area2D
 export var inner_missile_scene: PackedScene setget set_inner_scene
 onready var inner: Node
 
-export var damage = 150
-
 func set_inner_scene(scn: PackedScene) -> void:
 	inner_missile_scene = scn
 	if has_node("InnerMissile"):
@@ -28,7 +26,7 @@ func set_inner_scene(scn: PackedScene) -> void:
 # Not necessarily the parent of this node.
 var owning_node: Node setget set_owner, get_owner
 # direction is global and normalized.
-var target_node: Node setget set_target
+var target_node: Node setget set_target, get_target
 
 
 func set_owner(new: Node) -> void:
@@ -39,6 +37,9 @@ func get_owner() -> Node:
 
 func set_target(new: Node) -> void:
 	target_node = new
+
+func get_target() -> Node:
+	return target_node
 
 
 func _ready() -> void:
@@ -51,8 +52,9 @@ func _physics_process(delta) -> void:
 
 
 # Returns an amount of damage from 0.0 to 1.0
-func get_damage() -> float:
-	return inner.get_damage() * damage
+# NOTE: Was previously known as "get_damage()"
+func explode() -> float:
+	return inner.explode()
 
 
 # Returns if the missile agrees to being deflected
@@ -60,8 +62,8 @@ func can_deflect() -> bool:
 	return inner.can_deflect()
 
 
-# Let the missile know it has been deflected
-func deflected() -> void:
-	inner.deflected()
+# Let the missile know it got deflected, and with a force from 0.0 to 1.0.
+func deflected(force: float) -> void:
+	inner.deflected(force)
 
 
