@@ -1,0 +1,8 @@
+shader_type canvas_item;
+
+void fragment() {
+	vec4 p = texture(TEXTURE, UV.xy);
+	if (p.a <= 0.0) discard;
+	float s = sin(TIME + UV.x / UV.y);
+	COLOR = mix(vec4(s), p * MODULATE, 0.5);
+}

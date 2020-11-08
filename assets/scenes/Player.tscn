@@ -4,23 +4,15 @@
 [ext_resource path="res://assets/scripts/player_controller.gd" type="Script" id=2]
 [ext_resource path="res://assets/graphics/shield.png" type="Texture" id=3]
 [ext_resource path="res://assets/scripts/PlayerShield.gd" type="Script" id=4]
+[ext_resource path="res://assets/shaders/shield.shader" type="Shader" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.5, 40 )
 
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 5 )
 
-void fragment() {
-	float s = sin(TIME + UV.x / UV.y);
-	vec4 p = texture(TEXTURE, UV.xy);
-	COLOR = mix(vec4(s), p, 0.5);
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 12.3623, 46.75 )
 
 [node name="Player" type="Area2D" groups=[
@@ -46,14 +38,14 @@ position = Vector2( 48, 0 )
 script = ExtResource( 4 )
 
 [node name="ShieldSprite" type="Sprite" parent="Shield"]
-material = SubResource( 3 )
+modulate = Color( 0.156863, 0.309804, 1, 1 )
+material = SubResource( 2 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shield"]
 position = Vector2( 1.38775, 0 )
-shape = SubResource( 4 )
-
+shape = SubResource( 3 )
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Player_area_exited"]
 [connection signal="area_entered" from="Shield" to="Shield" method="_on_area_entered"]
