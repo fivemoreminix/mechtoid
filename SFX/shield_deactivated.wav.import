@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shield_deactivated.wav-965e1a7e327c6a0551aa7648e9c05172.sample"
+
+[deps]
+
+source_file="res://SFX/shield_deactivated.wav"
+dest_files=[ "res://.import/shield_deactivated.wav-965e1a7e327c6a0551aa7648e9c05172.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

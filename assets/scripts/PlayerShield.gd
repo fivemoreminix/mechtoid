@@ -32,6 +32,7 @@ func _on_area_entered(area: Area2D) -> void:
 			area.deflected($ForceTimer.time_left / $ForceTimer.wait_time)
 			area.rotate(deg2rad(180))
 			area.set_target(get_parent().get_opponent_node())
+			get_parent().get_node("SFX/ShieldHit").play()
 			emit_signal("deflected_missile", area)
 		else:
 			# TODO: run shield explosion / defeat animation

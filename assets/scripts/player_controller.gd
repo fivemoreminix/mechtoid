@@ -49,9 +49,10 @@ func _process(_delta):
 	if not is_ai_controlled:
 		if Input.is_action_just_pressed("shield"):
 			$Shield.set_shield_enabled(true)
+			$SFX/ShieldActivated.play()
 		if Input.is_action_just_released("shield"):
 			$Shield.set_shield_enabled(false)
-
+			$SFX/ShieldDeactivated.play()
 
 func _physics_process(delta):
 	var m = Vector2()
@@ -126,6 +127,8 @@ func apply_damage(amount):
 
 # TODO things to do before the player dies like animations scoring points and so ....
 func die():
+	$SFX/Destroyed.play()
+	yield($SFX/Destroyed, "finished")
 	print_debug("DEAD")
 	#queue_free()
 
