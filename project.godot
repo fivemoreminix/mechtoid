@@ -58,6 +58,17 @@ shield={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="LeftPlayer"
+2d_physics/layer_2="RightPlayer"
+2d_physics/layer_3="LPmissile"
+2d_physics/layer_4="RPmissile"
+2d_physics/layer_5="LPShield"
+2d_physics/layer_6="RPShield"
+2d_physics/layer_7="TopBoundary"
+2d_physics/layer_8="BottomBoundary"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
