@@ -8,10 +8,11 @@
 "missile",
 ]]
 collision_layer = 12
-collision_mask = 3
+collision_mask = 771
 script = ExtResource( 1 )
 inner_missile_scene = ExtResource( 2 )
 
 [node name="Destroyed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 pitch_scale = 2.74
+[connection signal="area_entered" from="." to="." method="_on_Missile_area_entered"]

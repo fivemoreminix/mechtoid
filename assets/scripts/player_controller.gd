@@ -123,8 +123,8 @@ func shoot_missile(missile_scn_path: String):
 	var m = missile.instance()
 	m.set_inner_scene(load(missile_scn_path))
 	m.set_owner(self)
-	get_tree().root.add_child(m)
 	m.target_node = get_opponent_node()
+	get_tree().root.add_child(m)
 	m.global_position = global_position
 	m.look_at($MissileSpawn.global_position)
 #	m.look_at(m.to_global(Vector2.LEFT if facing_opposite else Vector2.RIGHT))
@@ -171,5 +171,11 @@ func _set_energy(value):
 		if energy == 0:
 			emit_signal("no_energy")
 
-
-
+func _on_slow_charging_speed(player):
+	if player.to_lower() == kind.to_lower():
+		
+		# we might send the slow value from the missile as well ~!
+		$Shield.energy_charge_speed -= 2
+		_set_energy(energy - 50) # :)
+		_set_health(health - 50)
+	

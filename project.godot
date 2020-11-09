@@ -98,6 +98,8 @@ shoot={
 2d_physics/layer_6="RPShield"
 2d_physics/layer_7="TopBoundary"
 2d_physics/layer_8="BottomBoundary"
+2d_physics/layer_9="RightStation"
+2d_physics/layer_10="LeftStation"
 
 [rendering]
 

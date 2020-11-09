@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/boundary.gd" type="Script" id=2]
@@ -8,9 +8,13 @@
 [ext_resource path="res://assets/HealthBar/rect1269.png" type="Texture" id=6]
 [ext_resource path="res://assets/scenes/ItemsBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scenes/EnergyBar.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/scripts/LeftStation.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 46, 739.09 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31.8335, 324.487 )
 
 [node name="Game" type="Node2D"]
 
@@ -73,6 +77,34 @@ shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="ChargingStations" type="Node2D" parent="."]
+
+[node name="LeftStation" type="Area2D" parent="ChargingStations" groups=[
+"station",
+]]
+position = Vector2( -51.6332, 0 )
+collision_layer = 512
+collision_mask = 12
+script = ExtResource( 9 )
+side = "human"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChargingStations/LeftStation"]
+position = Vector2( 0, 368.111 )
+shape = SubResource( 2 )
+
+[node name="RightStation" type="Area2D" parent="ChargingStations" groups=[
+"station",
+]]
+position = Vector2( 1338.94, -45.4492 )
+collision_layer = 256
+collision_mask = 12
+script = ExtResource( 9 )
+side = "alien"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChargingStations/RightStation"]
+position = Vector2( 0, 368.111 )
+shape = SubResource( 2 )
 
 [node name="Interface" type="CanvasLayer" parent="."]
 

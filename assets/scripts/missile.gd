@@ -9,6 +9,8 @@ extends Area2D
 # can_deflect() -> bool
 # deflected() -> void # let the missile know it got deflected
 
+signal slow_charging_speed(player)
+
 export var inner_missile_scene: PackedScene setget set_inner_scene
 onready var inner: Node
 
@@ -49,6 +51,8 @@ func get_target() -> Node:
 func _ready() -> void:
 	assert(inner != null)
 	set_physics_process(true)
+	connect("slow_charging_speed", get_owner(), "_on_slow_charging_speed")
+	connect("slow_charging_speed", get_target(), "_on_slow_charging_speed")
 
 
 func _physics_process(delta) -> void:
@@ -73,9 +77,17 @@ func deflected(force: float) -> void:
 # Animation needed for the explosion
 func exploision():
 	set_physics_process(false) # to stop the missile from moving 
-
 	$Destroyed.play()
 	yield($Destroyed, "finished")
 	queue_free()
 
 
+
+
+func _on_Missile_area_entered(area):
+	if area.is_in_group("station"):
+		if area.side == "alien":
+			emit_signal("slow_charging_speed", area.side)
+		elif area.side == "human":
+			emit_signal("slow_charging_speed", area.side)
+		inner.explode()
