@@ -57,8 +57,11 @@ stream = ExtResource( 4 )
 volume_db = 1.5
 pitch_scale = 1.21
 autoplay = true
+max_distance = 5000.0
+attenuation = 0.812252
 
 [node name="MissileFire" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 5 )
 pitch_scale = 1.25
 autoplay = true
+max_distance = 5000.0
