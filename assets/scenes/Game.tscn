@@ -25,7 +25,11 @@ position = Vector2( 90, 360 )
 collision_mask = 12
 kind = "Human"
 is_ai_controlled = true
+<<<<<<< HEAD
 max_health = 450.0
+=======
+max_health = 600.0
+>>>>>>> aec87fd2b590427b8893e13d3f66a6d39dd4d2d1
 
 [node name="AIPlayerController" parent="LeftPlayer" instance=ExtResource( 5 )]
 
