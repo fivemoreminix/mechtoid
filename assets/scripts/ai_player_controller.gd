@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 	# if it is targeting us, then:
 	#	align our y with it
 	#	hold shield until it is deflected
+	
 	var incoming_missiles = get_incoming_missiles()
 	if incoming_missiles.size() > 0:
 		# Step 1: Find the closest missile that is coming at us:
@@ -41,9 +42,11 @@ func _process(delta: float) -> void:
 		
 		# Step 3: Keep our shield going:
 		if not shield.get_shield_enabled():
+			
 			shield.set_shield_enabled(true)
 	else:
 		if shield.get_shield_enabled():
+			
 			shield.set_shield_enabled(false)
 
 

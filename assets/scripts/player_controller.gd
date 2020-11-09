@@ -25,10 +25,8 @@ onready var health = max_health setget _set_health
 # Energy 
 export (float) var max_energy = 100
 onready var energy = max_energy setget _set_energy
-var energy_charge_speed = 20 
-var energy_draining_speed = 50
-var is_charging = false
-var is_draining = false
+
+
 # For use with boundaries (to keep ships from going off screen)
 # In global direction, not local
 var can_move_up: bool = true
@@ -66,25 +64,14 @@ func _input(event: InputEvent) -> void:
 			if missile_scn_path != null: # User entered an invalid option otherwise ...
 				shoot_missile(missile_scn_path)
 
-
-func ativate_shield():
-	is_draining = true
-	$Shield.set_shield_enabled(true)
-	$SFX/ShieldActivated.play()
-
-func deactivate_shield():
-	is_draining = false
-	$Shield.set_shield_enabled(false)
-	$SFX/ShieldDeactivated.play()
-
 func _process(delta):
 	if not is_ai_controlled:
-		if Input.is_action_just_pressed("shield") and energy == max_energy:
-			ativate_shield()
+		if Input.is_action_just_pressed("shield") and not energy == 0:
+			$Shield.set_shield_enabled(true)
 		if Input.is_action_just_released("shield"):
-			deactivate_shield()
-		drain_energy(delta)
-		recharge_energy(delta)
+			$Shield.set_shield_enabled(false)
+
+
 
 
 func _physics_process(delta):
@@ -180,20 +167,9 @@ func _set_energy(value):
 	var prev_energy = energy
 	energy = clamp(value, 0, max_energy)
 	if not energy == prev_energy:
-		is_charging = true
 		emit_signal("energy_updated", energy)
 		if energy == 0:
-			deactivate_shield()
 			emit_signal("no_energy")
 
 
-func recharge_energy(delta):
-	if is_charging:
-		if energy == max_energy:
-			is_charging = false
-		else:
-			_set_energy(energy + (energy_charge_speed * delta))
 
-func drain_energy(delta):
-	if is_draining:
-		_set_energy(energy - (energy_draining_speed * delta))

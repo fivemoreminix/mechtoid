@@ -56,19 +56,22 @@ shape = SubResource( 3 )
 [node name="ForceTimer" type="Timer" parent="Shield"]
 one_shot = true
 
+[node name="SFX" type="Node" parent="Shield"]
+
+[node name="ShieldActivated" type="AudioStreamPlayer" parent="Shield/SFX"]
+stream = ExtResource( 7 )
+
+[node name="ShieldDeactivated" type="AudioStreamPlayer" parent="Shield/SFX"]
+stream = ExtResource( 9 )
+
+[node name="ShieldHit" type="AudioStreamPlayer" parent="Shield/SFX"]
+stream = ExtResource( 8 )
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="Destroyed" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 6 )
-
-[node name="ShieldActivated" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 7 )
-
-[node name="ShieldDeactivated" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 9 )
-
-[node name="ShieldHit" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 8 )
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Player_area_exited"]
+[connection signal="no_energy" from="." to="Shield" method="_on_Player_no_energy"]
 [connection signal="area_entered" from="Shield" to="Shield" method="_on_area_entered"]

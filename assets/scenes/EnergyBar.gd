@@ -11,7 +11,7 @@ func _ready():
 
 func update_energy_bars(energy):
 	energy_bar.value = energy
-	update_tween.interpolate_property(energy_bar_under, "value", energy_bar_under.value, energy, 0.0, Tween.TRANS_SINE, Tween.EASE_IN_OUT, 0.00)
+	update_tween.interpolate_property(energy_bar_under, "value", energy_bar_under.value, energy, 0.0, Tween.TRANS_SINE)
 	update_tween.start()
 
 func update_max_energybar(max_energy):
