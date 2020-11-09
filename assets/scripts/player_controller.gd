@@ -1,10 +1,14 @@
 tool
 extends Area2D
 
-# health signals for tracking the state of the obj
+# energy signals for tracking the state of the obj
 signal health_updated(health)
 signal max_health_updated(max_health)
 signal killed()
+#energy signals
+signal energy_updated(energy)
+signal max_energy_updated(max_energy)
+signal no_energy()
 
 var missile: PackedScene = preload("res://assets/scenes/missiles/Missile.tscn")
 
@@ -15,10 +19,16 @@ export(NodePath) var ui_items_box_node
 const MOVE_SPEED = 350
 export(float, EXP, 0.0, 1.0) var acceleration
 
-# Health
+# health
 export (float) var max_health = 300
 onready var health = max_health setget _set_health
-
+# Energy 
+export (float) var max_energy = 100
+onready var energy = max_energy setget _set_energy
+var energy_charge_speed = 20 
+var energy_draining_speed = 50
+var is_charging = false
+var is_draining = false
 # For use with boundaries (to keep ships from going off screen)
 # In global direction, not local
 var can_move_up: bool = true
@@ -45,6 +55,7 @@ func _ready():
 #	call_deferred("shoot_missile")
 	#changing the max health in the healthbar
 	emit_signal("max_health_updated", max_health)
+	emit_signal("max_energy_updated", max_energy)
 
 func _input(event: InputEvent) -> void:
 	if is_ai_controlled: return
@@ -55,14 +66,26 @@ func _input(event: InputEvent) -> void:
 			if missile_scn_path != null: # User entered an invalid option otherwise ...
 				shoot_missile(missile_scn_path)
 
-func _process(_delta):
+
+func ativate_shield():
+	is_draining = true
+	$Shield.set_shield_enabled(true)
+	$SFX/ShieldActivated.play()
+
+func deactivate_shield():
+	is_draining = false
+	$Shield.set_shield_enabled(false)
+	$SFX/ShieldDeactivated.play()
+
+func _process(delta):
 	if not is_ai_controlled:
-		if Input.is_action_just_pressed("shield"):
-			$Shield.set_shield_enabled(true)
-			$SFX/ShieldActivated.play()
+		if Input.is_action_just_pressed("shield") and energy == max_energy:
+			ativate_shield()
 		if Input.is_action_just_released("shield"):
-			$Shield.set_shield_enabled(false)
-			$SFX/ShieldDeactivated.play()
+			deactivate_shield()
+		drain_energy(delta)
+		recharge_energy(delta)
+
 
 func _physics_process(delta):
 	var m = Vector2()
@@ -152,3 +175,25 @@ func _set_health(value):
 		if health == 0:
 			die() 
 			emit_signal("killed")
+
+func _set_energy(value):
+	var prev_energy = energy
+	energy = clamp(value, 0, max_energy)
+	if not energy == prev_energy:
+		is_charging = true
+		emit_signal("energy_updated", energy)
+		if energy == 0:
+			deactivate_shield()
+			emit_signal("no_energy")
+
+
+func recharge_energy(delta):
+	if is_charging:
+		if energy == max_energy:
+			is_charging = false
+		else:
+			_set_energy(energy + (energy_charge_speed * delta))
+
+func drain_energy(delta):
+	if is_draining:
+		_set_energy(energy - (energy_draining_speed * delta))

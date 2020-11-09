@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/boundary.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/scenes/AIPlayerController.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/HealthBar/rect1269.png" type="Texture" id=6]
 [ext_resource path="res://assets/scenes/ItemsBox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/scenes/EnergyBar.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 46, 739.09 )
@@ -24,24 +25,18 @@ position = Vector2( 90, 360 )
 collision_mask = 12
 kind = "Human"
 is_ai_controlled = true
-<<<<<<< HEAD
-ui_items_box_node = NodePath("")
 max_health = 450.0
-=======
-max_health = 600.0
->>>>>>> 013994aea3cebce9ca873b8d6c62dfd9590a8da4
 
 [node name="AIPlayerController" parent="LeftPlayer" instance=ExtResource( 5 )]
 
 [node name="LeftPlayer2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1190, 360 )
+position = Vector2( 1237, 336 )
 rotation = 3.14159
 collision_layer = 2
 collision_mask = 12
 kind = "alien"
-is_ai_controlled = false
 ui_items_box_node = NodePath("../Interface/ItemsBox")
-max_health = 600.0
+max_health = 450.0
 
 [node name="TopBoundary" type="Area2D" parent="." groups=[
 "boundary",
@@ -129,15 +124,38 @@ max_value = 0.0
 value = 0.0
 tint_progress = Color( 0, 0.713726, 0, 1 )
 
+[node name="EnergyBarLeft" parent="Interface/TextureRect" instance=ExtResource( 8 )]
+anchor_top = 0.0
+anchor_right = 0.0
+margin_left = -225.0
+margin_top = 55.0
+
+[node name="EnergyBarRight" parent="Interface/TextureRect" instance=ExtResource( 8 )]
+anchor_left = 1.0
+anchor_top = 0.0
+margin_left = 225.0
+margin_top = 55.0
+rect_scale = Vector2( -1, 1 )
+
 [node name="ItemsBox" parent="Interface" instance=ExtResource( 7 )]
 margin_top = -83.0266
 margin_bottom = -32.0
 options = [ 0 ]
+[connection signal="energy_updated" from="LeftPlayer" to="Interface/TextureRect/EnergyBarLeft" method="_on_LeftPlayer_energy_updated"]
 [connection signal="health_updated" from="LeftPlayer" to="Interface/TextureRect/HealthBarLeftP" method="_on_LeftPlayer_health_updated"]
+[connection signal="max_energy_updated" from="LeftPlayer" to="Interface/TextureRect/EnergyBarLeft" method="_on_LeftPlayer_max_energy_updated"]
 [connection signal="max_health_updated" from="LeftPlayer" to="Interface/TextureRect/HealthBarLeftP" method="_on_LeftPlayer_max_health_updated"]
+[connection signal="energy_updated" from="LeftPlayer2" to="Interface/TextureRect/EnergyBarRight" method="_on_LeftPlayer2_energy_updated"]
 [connection signal="health_updated" from="LeftPlayer2" to="Interface/TextureRect/HealthBarRightP" method="_on_LeftPlayer2_health_updated"]
+[connection signal="max_energy_updated" from="LeftPlayer2" to="Interface/TextureRect/EnergyBarRight" method="_on_LeftPlayer2_max_energy_updated"]
 [connection signal="max_health_updated" from="LeftPlayer2" to="Interface/TextureRect/HealthBarRightP" method="_on_LeftPlayer2_max_health_updated"]
 
 [editable path="Interface/TextureRect/HealthBarLeftP"]
 
 [editable path="Interface/TextureRect/HealthBarRightP"]
+
+[editable path="Interface/TextureRect/EnergyBarLeft"]
+
+[editable path="Interface/TextureRect/EnergyBarRight"]
+
+[editable path="Interface/ItemsBox"]

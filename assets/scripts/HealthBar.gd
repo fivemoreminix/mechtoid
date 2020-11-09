@@ -3,10 +3,10 @@ extends Control
 onready var health_bar = $HealthBar
 onready var health_bar_under = $HealthBarUnder
 onready var update_tween = $Tween
-var default_max_health
+var default_max_value
 
 func _ready():
-	update_max_healthbar(default_max_health)
+	update_max_healthbar(default_max_value)
 
 func update_max_healthbar(max_health):
 	health_bar.max_value = max_health
@@ -23,7 +23,7 @@ func _on_LeftPlayer_health_updated(health):
 	update_health_bars(health)
 
 func _on_LeftPlayer_max_health_updated(max_health):
-	default_max_health = max_health
+	default_max_value = max_health
 
 
 func _on_LeftPlayer2_health_updated(health):
@@ -31,5 +31,7 @@ func _on_LeftPlayer2_health_updated(health):
 
 
 func _on_LeftPlayer2_max_health_updated(max_health):
-	default_max_health = max_health
+	default_max_value = max_health
+
+
 
