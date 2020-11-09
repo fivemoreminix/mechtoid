@@ -51,7 +51,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		var sbox = get_node(ui_items_box_node)
 		if event.scancode >= 48 and event.scancode <= 57: # Within KEY_0 to KEY_9
-			var missile_scn_path = sbox.get_option_missile_scene_path(event.scancode - 48 - 1)
+			var missile_scn_path = sbox.use(event.scancode - 48 - 1)
 			if missile_scn_path != null: # User entered an invalid option otherwise ...
 				shoot_missile(missile_scn_path)
 
