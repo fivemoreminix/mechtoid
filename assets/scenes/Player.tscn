@@ -41,6 +41,7 @@ position = Vector2( 0, 8.8185 )
 [node name="Shield" type="Area2D" parent="."]
 position = Vector2( 48, 0 )
 script = ExtResource( 4 )
+energy_draining_speed = 20
 
 [node name="ShieldSprite" type="Sprite" parent="Shield"]
 modulate = Color( 0.156863, 0.309804, 1, 1 )

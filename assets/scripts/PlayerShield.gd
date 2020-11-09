@@ -57,6 +57,7 @@ func charging(delta):
 
 func draining(delta):
 	if is_drainging:
+		is_charging = false
 		get_parent()._set_energy(get_parent().energy - energy_draining_speed * delta)
 
 func _on_Player_no_energy():
