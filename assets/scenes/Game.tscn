@@ -24,12 +24,7 @@ position = Vector2( 90, 360 )
 collision_mask = 12
 kind = "Human"
 is_ai_controlled = true
-<<<<<<< HEAD
-ui_items_box_node = NodePath("")
-max_health = 450.0
-=======
 max_health = 600.0
->>>>>>> 013994aea3cebce9ca873b8d6c62dfd9590a8da4
 
 [node name="AIPlayerController" parent="LeftPlayer" instance=ExtResource( 5 )]
 
@@ -39,7 +34,6 @@ rotation = 3.14159
 collision_layer = 2
 collision_mask = 12
 kind = "alien"
-is_ai_controlled = false
 ui_items_box_node = NodePath("../Interface/ItemsBox")
 max_health = 600.0
 

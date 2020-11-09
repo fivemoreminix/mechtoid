@@ -29,6 +29,8 @@ var owning_node: Node setget set_owner, get_owner
 # direction is global and normalized.
 var target_node: Node setget set_target, get_target
 
+var target_pos: Vector2
+
 
 func set_owner(new: Node) -> void:
 	owning_node = new
@@ -38,6 +40,7 @@ func get_owner() -> Node:
 
 func set_target(new: Node) -> void:
 	target_node = new
+	target_pos = target_node.global_position
 
 func get_target() -> Node:
 	return target_node
@@ -49,7 +52,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta) -> void:
-	inner.move(target_node, delta)
+	inner.move(target_pos, delta)
 
 
 # Returns an amount of damage from 0.0 to 1.0
