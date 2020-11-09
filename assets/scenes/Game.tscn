@@ -24,7 +24,7 @@ position = Vector2( 90, 360 )
 collision_mask = 12
 kind = "Human"
 is_ai_controlled = true
-max_health = 450.0
+max_health = 600.0
 
 [node name="AIPlayerController" parent="LeftPlayer" instance=ExtResource( 5 )]
 
@@ -35,7 +35,7 @@ collision_layer = 2
 collision_mask = 12
 kind = "alien"
 ui_items_box_node = NodePath("../Interface/ItemsBox")
-max_health = 450.0
+max_health = 600.0
 
 [node name="TopBoundary" type="Area2D" parent="." groups=[
 "boundary",
@@ -135,5 +135,3 @@ options = [ 0 ]
 [editable path="Interface/TextureRect/HealthBarLeftP"]
 
 [editable path="Interface/TextureRect/HealthBarRightP"]
-
-[editable path="Interface/ItemsBox"]
