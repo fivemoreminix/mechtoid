@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/boundary.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/scenes/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/scenes/AIPlayerController.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/HealthBar/rect1269.png" type="Texture" id=6]
+[ext_resource path="res://assets/scenes/ItemsBox.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 46, 739.09 )
@@ -33,6 +34,7 @@ rotation = 3.14159
 collision_layer = 2
 collision_mask = 12
 kind = "alien"
+ui_items_box_node = NodePath("../Interface/ItemsBox")
 max_health = 600.0
 
 [node name="TopBoundary" type="Area2D" parent="." groups=[
@@ -120,6 +122,11 @@ value = 0.0
 max_value = 0.0
 value = 0.0
 tint_progress = Color( 0, 0.713726, 0, 1 )
+
+[node name="ItemsBox" parent="Interface" instance=ExtResource( 7 )]
+margin_top = -83.0266
+margin_bottom = -32.0
+options = [ 0 ]
 [connection signal="health_updated" from="LeftPlayer" to="Interface/TextureRect/HealthBarLeftP" method="_on_LeftPlayer_health_updated"]
 [connection signal="max_health_updated" from="LeftPlayer" to="Interface/TextureRect/HealthBarLeftP" method="_on_LeftPlayer_max_health_updated"]
 [connection signal="health_updated" from="LeftPlayer2" to="Interface/TextureRect/HealthBarRightP" method="_on_LeftPlayer2_health_updated"]
@@ -128,3 +135,5 @@ tint_progress = Color( 0, 0.713726, 0, 1 )
 [editable path="Interface/TextureRect/HealthBarLeftP"]
 
 [editable path="Interface/TextureRect/HealthBarRightP"]
+
+[editable path="Interface/ItemsBox"]

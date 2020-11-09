@@ -10,6 +10,7 @@ var missile: PackedScene = preload("res://assets/scenes/missiles/Missile.tscn")
 
 export(String, "human", "alien") var kind = "human" setget set_kind
 export var is_ai_controlled: bool = false
+export(NodePath) var ui_items_box_node
 
 const MOVE_SPEED = 350
 export(float, EXP, 0.0, 1.0) var acceleration
@@ -38,12 +39,21 @@ func _ready():
 		return # We don't want to do any processing in the editor (caused by tool mode)
 	
 	set_process(true)
-	
+	set_process_input(true)
 	set_physics_process(true)
 	
-	call_deferred("shoot_missile")
+#	call_deferred("shoot_missile")
 	#changing the max health in the healthbar
 	emit_signal("max_health_updated", max_health)
+
+func _input(event: InputEvent) -> void:
+	if is_ai_controlled: return
+	if event is InputEventKey and event.pressed and not event.echo:
+		var sbox = get_node(ui_items_box_node)
+		if event.scancode >= 48 and event.scancode <= 57: # Within KEY_0 to KEY_9
+			var missile_scn_path = sbox.get_option_missile_scene_path(event.scancode - 48 - 1)
+			if missile_scn_path != null: # User entered an invalid option otherwise ...
+				shoot_missile(missile_scn_path)
 
 func _process(_delta):
 	if not is_ai_controlled:
@@ -99,9 +109,9 @@ func get_opponent_node():
 	assert(false)
 
 
-func shoot_missile():
+func shoot_missile(missile_scn_path: String):
 	var m = missile.instance()
-	m.set_inner_scene(preload("res://assets/scenes/missiles/HumanMissile.tscn"))
+	m.set_inner_scene(load(missile_scn_path))
 	m.set_owner(self)
 	get_tree().root.add_child(m)
 	m.target_node = get_opponent_node()
