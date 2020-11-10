@@ -22,6 +22,7 @@ extents = Vector2( 16.8821, 42.2936 )
 [node name="Player" type="Area2D" groups=[
 "player",
 ]]
+collision_mask = 1036
 script = ExtResource( 2 )
 acceleration = 0.2
 

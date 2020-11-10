@@ -21,5 +21,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0.021, 2560, 720 )
 
 [node name="foregroundLayer" type="Sprite" parent="."]
+self_modulate = Color( 0.336304, 0.368247, 0.453125, 1 )
 texture = ExtResource( 1 )
 centered = false
