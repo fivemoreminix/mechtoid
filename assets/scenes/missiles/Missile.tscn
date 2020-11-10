@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/scripts/missile.gd" type="Script" id=1]
 [ext_resource path="res://SFX/robot_destroyed.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/scenes/missiles/AlienMissile.tscn" type="PackedScene" id=4]
 
 [node name="Missile" type="Area2D" groups=[
 "missile",
@@ -9,6 +10,7 @@
 collision_layer = 12
 collision_mask = 771
 script = ExtResource( 1 )
+inner_missile_scene = ExtResource( 4 )
 
 [node name="Destroyed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
