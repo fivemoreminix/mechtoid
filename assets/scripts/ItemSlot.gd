@@ -4,11 +4,12 @@ extends Panel
 # After adding or changing options here,
 # please update the script in ItemsBox.
 const OPTIONS = [
-	{"tex": "res://assets/Missiles/missile.png", "scene": "res://assets/scenes/missiles/HumanMissile.tscn", "time": 5.0}
+	{"tex": "res://assets/Missiles/missile.png", "scene": "res://assets/scenes/missiles/HumanMissile.tscn", "time": 5.0},
+	{"tex": "res://assets/Missiles/alien_misssile.png", "scene": "res://assets/scenes/missiles/AlienMissile.tscn", "time": 5.0},
 ]
 
 # Named in the order of OPTIONS
-export(int, "Human Missile") var option setget set_option
+export(int, "Human Missile", "Alien Missile") var option setget set_option
 
 
 func _process(delta: float) -> void:

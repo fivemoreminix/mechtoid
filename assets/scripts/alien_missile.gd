@@ -1,11 +1,11 @@
 extends CollisionShape2D
 
-const TURN_SPEED = 2
+const TURN_SPEED = 4
 const MAX_SPEED = 1000.0
-const INACCURACY_PER_BOUNCE = 50 # In pixels
-const MARGINS = 100 # edges of the screen we will not allow target_pos to be
+const INACCURACY_PER_BOUNCE = 30 # In pixels
+const MARGINS = 75 # edges of the screen we will not allow target_pos to be
 
-var speed = 400.0
+var speed = 500.0
 var bounces = 0
 var inaccuracy = 0
 
@@ -23,9 +23,6 @@ func move(target_pos, phys_delta):
 	
 	# Always fly forward
 	m.position += m.transform.basis_xform(Vector2.RIGHT) * speed * phys_delta
-	# Apply sinoid wave
-	var up = m.transform.basis_xform(Vector2.UP)
-	m.position += up * sin(Engine.get_frames_drawn() / 5.0)
 
 
 # explode() returns a number between 0.0 and 1.0 determining how much
@@ -33,12 +30,9 @@ func move(target_pos, phys_delta):
 # the parent node.
 # NOTE: Was previously known as "get_damage()"
 func explode() -> float:
-	# TODO: could probably do a great, negative gravity on this Area2D to simulate physical force
 	explosion_state()
-	get_parent().exploision() # ... for now ;)
+	get_parent().exploision()
 	
-	# + 1 because if it hasn't bounced it must still do damage
-#	return (bounces / float(MAX_BOUNCES) + 1)
 	return speed / MAX_SPEED
 
 
@@ -49,8 +43,7 @@ func can_deflect() -> bool:
 # Let the missile know it got deflected, and with a force from 0.0 to 1.0.
 func deflected(force: float) -> void:
 	bounces += 1
-	speed += 200.0 * force
-	# TODO: flash red when deflected to maximum (self modulate)
+	speed += 100.0 * force
 	
 	inaccuracy = (bounces * INACCURACY_PER_BOUNCE) * (1 if (randi() % 2 == 0) else -1)
 

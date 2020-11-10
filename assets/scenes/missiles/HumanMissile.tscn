@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/scripts/human_missile.gd" type="Script" id=1]
 [ext_resource path="res://assets/Missiles/missile.png" type="Texture" id=2]
 [ext_resource path="res://SFX/missile_fired.wav" type="AudioStream" id=3]
 [ext_resource path="res://SFX/missile_flying_higher_pitch.wav" type="AudioStream" id=4]
 [ext_resource path="res://SFX/missile_flying_lower_pitch.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/graphics/white_smoke.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.45939, 32.3555 )
+extents = Vector2( 9.39083, 25.8257 )
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.71313, 0.0, 0, 0 ]
@@ -23,10 +24,9 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 34.48
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 8.0
-scale_random = 0.65
+scale = 0.06
 scale_curve = SubResource( 3 )
-color = Color( 1, 1, 1, 0.572549 )
+color = Color( 1, 1, 1, 0.45098 )
 
 [node name="HumanMissile" type="CollisionShape2D"]
 rotation = 1.57079
@@ -41,10 +41,12 @@ texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0.314803, 33.4043 )
-amount = 20
+amount = 16
+lifetime = 0.2
 randomness = 1.0
 local_coords = false
 process_material = SubResource( 4 )
+texture = ExtResource( 6 )
 
 [node name="SFX" type="Node" parent="."]
 
