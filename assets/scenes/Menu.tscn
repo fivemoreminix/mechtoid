@@ -1,0 +1,150 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/fonts/random-5/random-5-buttons.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/random-5/random-5-headers.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/scripts/Menu.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="Menu" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -245.5
+margin_top = -287.0
+margin_right = 245.5
+margin_bottom = 287.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitlePanel" type="Panel" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -233.5
+margin_top = 17.0
+margin_right = 233.5
+margin_bottom = 94.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/TitlePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 3 )
+text = "Mechoid Deflectoid"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 129.0
+margin_right = -127.0
+margin_bottom = -104.0
+custom_constants/separation = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SingleplayerButton" type="Button" parent="Panel/VBoxContainer"]
+margin_right = 236.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 2 )
+text = "Singleplayer"
+flat = true
+
+[node name="MultiplayerButton" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 41.0
+margin_right = 236.0
+margin_bottom = 75.0
+custom_fonts/font = ExtResource( 2 )
+disabled = true
+text = "Multiplayer"
+flat = true
+
+[node name="SoundsButton" type="CheckButton" parent="Panel/VBoxContainer"]
+margin_top = 82.0
+margin_right = 236.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 2 )
+pressed = true
+text = "Sounds"
+align = 1
+
+[node name="MusicButton" type="CheckButton" parent="Panel/VBoxContainer"]
+margin_top = 123.0
+margin_right = 236.0
+margin_bottom = 157.0
+custom_fonts/font = ExtResource( 2 )
+pressed = true
+text = "Music"
+align = 1
+
+[node name="FullscreenButton" type="CheckButton" parent="Panel/VBoxContainer"]
+margin_top = 164.0
+margin_right = 236.0
+margin_bottom = 198.0
+custom_fonts/font = ExtResource( 2 )
+text = "Fullscreen"
+align = 1
+
+[node name="BorderlessButton" type="CheckButton" parent="Panel/VBoxContainer"]
+margin_top = 205.0
+margin_right = 236.0
+margin_bottom = 239.0
+custom_fonts/font = ExtResource( 2 )
+text = "Borderless"
+align = 1
+
+[node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 246.0
+margin_right = 236.0
+margin_bottom = 280.0
+custom_fonts/font = ExtResource( 2 )
+text = "Quit Game"
+flat = true
+
+[node name="Copyright" type="RichTextLabel" parent="Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+margin_top = -62.0
+margin_right = -14.0
+custom_styles/normal = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[color=green]A game by[/color] Luke Wilson [color=green]and[/color] Ayman Lezhar
+
+[url=https://github.com/codemessiah/space-tennis-game]Open source[/url] and GPL v3 licensed"
+text = "A game by Luke Wilson and Ayman Lezhar
+
+Open source and GPL v3 licensed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="meta_clicked" from="Panel/Copyright" to="." method="_on_Copyright_meta_clicked"]

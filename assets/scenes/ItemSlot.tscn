@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/graphics/white50x50.png" type="Texture" id=1]
 [ext_resource path="res://assets/Missiles/missile.png" type="Texture" id=2]
 [ext_resource path="res://assets/scripts/ItemSlot.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/random-5/random-5.tres" type="DynamicFont" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0588235, 0.0588235, 0.0588235, 0.823529 )
@@ -117,9 +118,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -16.0
-margin_top = -20.0
-margin_bottom = 2.0
+margin_left = -19.0
+margin_top = -22.0
+margin_bottom = 1.0
+custom_fonts/font = ExtResource( 4 )
 text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
