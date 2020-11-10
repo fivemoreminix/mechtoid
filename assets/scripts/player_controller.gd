@@ -16,7 +16,7 @@ export(String, "human", "alien") var kind = "human" setget set_kind
 export var is_ai_controlled: bool = false
 export(NodePath) var ui_items_box_node
 
-const MOVE_SPEED = 350
+const MOVE_SPEED = 390
 export(float, EXP, 0.0, 1.0) var acceleration
 
 # health
