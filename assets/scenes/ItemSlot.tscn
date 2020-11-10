@@ -117,10 +117,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -14.0
+margin_left = -16.0
 margin_top = -20.0
-margin_right = -6.0
-margin_bottom = -6.0
+margin_bottom = 2.0
 text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -137,6 +136,7 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
