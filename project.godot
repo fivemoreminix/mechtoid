@@ -16,8 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Mechoid Deflectoid"
-run/main_scene="res://assets/scenes/Game.tscn"
+run/main_scene="res://assets/scenes/Menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://assets/scripts/globals.gd"
 
 [display]
 
