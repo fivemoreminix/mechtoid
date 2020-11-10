@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/boundary.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/ScreenShake/ScreenShake.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/scenes/Astroids_sender.tscn" type="PackedScene" id=11]
 [ext_resource path="res://SFX/gameplay_music1.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/Robots/AlienRobot.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 46, 739.09 )
@@ -30,6 +31,10 @@ is_ai_controlled = true
 max_health = 450.0
 max_energy = 70.0
 
+[node name="Shield" parent="LeftPlayer" index="3"]
+collision_layer = 16
+collision_mask = 1036
+
 [node name="AIPlayerController" parent="LeftPlayer" instance=ExtResource( 5 )]
 
 [node name="LeftPlayer2" parent="." instance=ExtResource( 1 )]
@@ -40,6 +45,13 @@ kind = "alien"
 ui_items_box_node = NodePath("../Interface/ItemsBox")
 max_health = 450.0
 max_energy = 70.0
+
+[node name="Sprite" parent="LeftPlayer2" index="0"]
+texture = ExtResource( 13 )
+
+[node name="Shield" parent="LeftPlayer2" index="3"]
+collision_layer = 32
+collision_mask = 1036
 
 [node name="TopBoundary" type="Area2D" parent="." groups=[
 "boundary",
@@ -198,6 +210,10 @@ autoplay = true
 [connection signal="max_health_updated" from="LeftPlayer2" to="Interface/TextureRect/HealthBarRightP" method="_on_LeftPlayer2_max_health_updated"]
 [connection signal="area_entered" from="ChargingStations/LeftStation" to="ChargingStations/LeftStation" method="_on_LeftStation_area_entered"]
 [connection signal="area_entered" from="ChargingStations/RightStation" to="ChargingStations/RightStation" method="_on_RightStation_area_entered"]
+
+[editable path="LeftPlayer"]
+
+[editable path="LeftPlayer2"]
 
 [editable path="Interface/TextureRect/HealthBarLeftP"]
 

@@ -151,16 +151,21 @@ func shoot_missile(missile_scn_path: String):
 
 
 func _on_area_entered(area):
+	
 	if area.is_in_group("boundary"):
 		on_boundary(area, true)
 	elif area.is_in_group("missile") and (area.get_owner() != self or area.get_target() == self):
 		apply_damage(int(area.explode() * 100.0))
+	elif area.is_in_group("astroids"):
+		apply_damage(int(area.astroid_damage))
 
 
 func _on_Player_area_exited(area):
 	if area.is_in_group("boundary"): # If we left a boundary...
 		on_boundary(area, false)
 
+func appl_energy_damage(amount):
+	_set_energy(energy - amount)
 
 func apply_damage(amount):
 	_set_health(health - amount)
@@ -196,6 +201,14 @@ func _on_slow_charging_speed(player):
 		
 		# we might send the slow value from the missile as well ~!
 		$Shield.energy_charge_speed -= 2
-		_set_energy(energy - 50) # :)
-		_set_health(health - 50)
+		appl_energy_damage(50)
+		apply_damage(50)
 	
+
+# this called by get_tree() call group from astroid
+func _on_astroid_hit_station(player, astroid_damage):
+	if player.to_lower() == kind.to_lower():
+		apply_damage(astroid_damage)
+		appl_energy_damage(astroid_damage / 3)
+
+
