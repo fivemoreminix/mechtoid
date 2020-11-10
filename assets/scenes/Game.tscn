@@ -187,7 +187,7 @@ rect_scale = Vector2( -1, 1 )
 [node name="ItemsBox" parent="Interface" instance=ExtResource( 7 )]
 margin_top = -83.0266
 margin_bottom = -32.0
-options = [ 0, 1 ]
+items = [ 0 ]
 [connection signal="energy_updated" from="LeftPlayer" to="Interface/TextureRect/EnergyBarLeft" method="_on_LeftPlayer_energy_updated"]
 [connection signal="health_updated" from="LeftPlayer" to="Interface/TextureRect/HealthBarLeftP" method="_on_LeftPlayer_health_updated"]
 [connection signal="max_energy_updated" from="LeftPlayer" to="Interface/TextureRect/EnergyBarLeft" method="_on_LeftPlayer_max_energy_updated"]

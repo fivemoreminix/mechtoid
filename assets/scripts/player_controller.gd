@@ -54,6 +54,26 @@ func _ready():
 	#changing the max health in the healthbar
 	emit_signal("max_health_updated", max_health)
 	emit_signal("max_energy_updated", max_energy)
+	
+	# Initialize selectable missiles
+	if not is_ai_controlled:
+		call_deferred("_on_ItemsBox_ready")
+		get_node(ui_items_box_node).connect("item_used", self, "_on_ItemsBox_item_used")
+
+func _on_ItemsBox_ready() -> void:
+	var sbox = get_node(ui_items_box_node)
+	# Disable every other missile option
+	for item_slot in sbox.get_children():
+		item_slot.set_disabled(true)
+	# Insert the missile at option 1 for our kind of player
+	sbox.new_slot(0, 0 if kind == "human" else 1) # ... Just see ItemsBox.new_slot
+
+var used_first_missile = false
+func _on_ItemsBox_item_used(idx, item_data) -> void:
+	var sbox = get_node(ui_items_box_node)
+	if idx == 0 and not used_first_missile:
+		for item_slot in sbox.get_children():
+			item_slot.set_disabled(false) # Re-enable all missile options
 
 func _input(event: InputEvent) -> void:
 	if is_ai_controlled: return

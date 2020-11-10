@@ -1,18 +1,27 @@
 extends HBoxContainer
 
+signal item_used(index, option_data)
+
 var item_slot = preload("res://assets/scenes/ItemSlot.tscn")
 
-# Slot options can be added in ItemSlot.gd
-export(Array, int, "Human Missile", "Alien Missile") var options = []
+# Slot items can be added in ItemSlot.gd
+export(Array, int, "Human Missile", "Alien Missile") var items = []
 
 
 func _ready() -> void:
 	# Create every slot at the start of the game
-	for i in range(options.size()):
-		var slot = item_slot.instance()
-		add_child(slot)
-		slot.option = options[i]
-		slot.get_node("Label").text = str(i + 1)
+	for i in range(items.size()):
+		new_slot(i, items[i])
+
+
+func new_slot(idx: int, slot_option: int) -> void:
+	var slot = item_slot.instance()
+	add_child(slot)
+	slot.option = slot_option
+	slot.get_node("Label").text = str(idx + 1)
+	move_child(slot, idx) # Do a tree insert, moving every other slot in tree
+	for i in range(idx+1, get_child_count()): # For every slot that was moved ...
+		get_child(i).get_node("Label").text = str(i + 1) # Update their key
 
 
 # Returns the a string of the missile scene path from the ItemSlot index. Will
@@ -23,4 +32,5 @@ func use(idx: int):
 	if slot == null: return null
 	if slot.ready_to_use():
 		slot.start_timer()
+		emit_signal("item_used", idx, slot.OPTIONS[slot.option])
 		return slot.get_option_scene_path()
