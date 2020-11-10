@@ -3,7 +3,7 @@ extends HBoxContainer
 var item_slot = preload("res://assets/scenes/ItemSlot.tscn")
 
 # Slot options can be added in ItemSlot.gd
-export(Array, int, "Human Missile") var options = []
+export(Array, int, "Human Missile", "Alien Missile") var options = []
 
 
 func _ready() -> void:
