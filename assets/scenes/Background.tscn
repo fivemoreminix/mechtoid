@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/graphics/foreground.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/background.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/stars.png" type="Texture" id=3]
+[ext_resource path="res://assets/scripts/Background.gd" type="Script" id=4]
+
+[node name="Background" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="backgroundLayer" type="Sprite" parent="."]
+modulate = Color( 0.423529, 0.423529, 0.423529, 1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="starLayer" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 0, 0.021, 2560, 720 )
+
+[node name="foregroundLayer" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false

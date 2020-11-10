@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/boundary.gd" type="Script" id=2]
-[ext_resource path="res://assets/graphics/backgrounds/BG.png" type="Texture" id=3]
+[ext_resource path="res://assets/scenes/Background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scenes/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/scenes/AIPlayerController.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/HealthBar/rect1269.png" type="Texture" id=6]
@@ -20,11 +20,7 @@ extents = Vector2( 31.8335, 301.407 )
 
 [node name="Game" type="Node2D"]
 
-[node name="Background" type="Sprite" parent="."]
-modulate = Color( 0.666667, 0.564706, 0.564706, 1 )
-scale = Vector2( 1.00435, 1.00435 )
-texture = ExtResource( 3 )
-centered = false
+[node name="Background" parent="." instance=ExtResource( 3 )]
 
 [node name="LeftPlayer" parent="." instance=ExtResource( 1 )]
 position = Vector2( 90, 360 )
