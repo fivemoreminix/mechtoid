@@ -41,6 +41,8 @@ position = Vector2( 0, 8.8185 )
 
 [node name="Shield" type="Area2D" parent="."]
 position = Vector2( 48, 0 )
+collision_layer = 48
+collision_mask = 1025
 script = ExtResource( 4 )
 energy_draining_speed = 20
 
@@ -68,6 +70,10 @@ stream = ExtResource( 9 )
 
 [node name="ShieldHit" type="AudioStreamPlayer" parent="Shield/SFX"]
 stream = ExtResource( 8 )
+
+[node name="ShieldHitAstroid" type="AudioStreamPlayer" parent="Shield/SFX"]
+stream = ExtResource( 8 )
+pitch_scale = 0.59
 
 [node name="SFX" type="Node" parent="."]
 

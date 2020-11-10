@@ -1,16 +1,70 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/scripts/Normal_astroid.gd" type="Script" id=1]
+[ext_resource path="res://assets/Astroids/g9796.png" type="Texture" id=2]
+[ext_resource path="res://assets/Astroids/g9791.png" type="Texture" id=3]
+[ext_resource path="res://assets/Astroids/normal_astroid.png" type="Texture" id=4]
+[ext_resource path="res://assets/Astroids/g9781.png" type="Texture" id=5]
+[ext_resource path="res://assets/Astroids/g9806.png" type="Texture" id=6]
 [ext_resource path="res://assets/Astroids/g9801.png" type="Texture" id=7]
+[ext_resource path="res://SFX/robot_destroyed.wav" type="AudioStream" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.13674
 
-[node name="Astroid" type="RigidBody2D"]
-gravity_scale = 0.0
-linear_velocity = Vector2( 120, 20 )
-angular_velocity = 30.0
+[sub_resource type="Animation" id=4]
+resource_name = "Pop_out"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "popup"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Astroid" type="Area2D" groups=[
+"astroids",
+]]
+collision_layer = 1024
+collision_mask = 1843
 script = ExtResource( 1 )
+astroids_textures = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ) ]
+torque = 2.45
+deflection_power = -1.2
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 7 )
@@ -19,3 +73,20 @@ texture = ExtResource( 7 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "popup"
+anims/Pop_out = SubResource( 4 )
+anims/popup = SubResource( 3 )
+
+[node name="Pop_out" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="Destroyed" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = 5.0
+pitch_scale = 0.5
+attenuation = 0.466516
+[connection signal="area_entered" from="." to="." method="_on_Astroid_area_entered"]
+[connection signal="timeout" from="Pop_out" to="." method="_on_Pop_out_timeout"]

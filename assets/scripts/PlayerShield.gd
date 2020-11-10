@@ -37,6 +37,8 @@ func _process(delta: float) -> void:
 
 
 
+
+
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("missile"):
 		if area.can_deflect():
@@ -48,6 +50,9 @@ func _on_area_entered(area: Area2D) -> void:
 		else:
 			# TODO: run shield explosion / defeat animation
 			set_shield_enabled(false)
+	if area.is_in_group("astroids"):
+		area.deflect()
+		$SFX/ShieldHitAstroid.play()
 
 func charging(delta):
 	if is_charging:
@@ -63,3 +68,5 @@ func draining(delta):
 func _on_Player_no_energy():
 	set_shield_enabled(false)
 	wait_full_charging = true
+
+

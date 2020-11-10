@@ -3,12 +3,13 @@ extends Node2D
 onready var positions = $Positions
 
 export var max_astroids_to_send = 3
-export var min_astroids_to_send = 2
+export var min_astroids_to_send = 0
 
 var scene = preload("res://assets/scenes/Astroid.tscn")
 
 func _ready():
 	randomize()
+	call_deferred("_on_SendAstroid_timeout")
 
 func set_astroids_to_send():
 	return rand_range(min_astroids_to_send, max_astroids_to_send)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/boundary.gd" type="Script" id=2]
@@ -14,26 +14,6 @@
 [ext_resource path="res://SFX/gameplay_music1.ogg" type="AudioStream" id=12]
 [ext_resource path="res://assets/scenes/Menu.tscn" type="PackedScene" id=13]
 
-[sub_resource type="GDScript" id=3]
-script/source = "extends Node2D
-
-
-#func _ready() -> void:
-#	set_process(true)
-#
-#
-#func _process(delta: float) -> void:
-#	if Input.is_action_just_pressed(\"pause\"):
-#		get_node(\"Interface/Menu\").show()
-#
-#
-##func _input(event: InputEvent) -> void:
-##	if event is InputEventAction:
-##		print(\"action\")
-##		if event.action == \"pause\":
-#
-"
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 46, 739.09 )
 
@@ -41,7 +21,6 @@ extents = Vector2( 46, 739.09 )
 extents = Vector2( 31.8335, 301.407 )
 
 [node name="Game" type="Node2D"]
-script = SubResource( 3 )
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
 

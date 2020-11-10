@@ -26,5 +26,6 @@ position = Vector2( 635.313, 550.006 )
 position = Vector2( 550.006, 673.477 )
 
 [node name="SendAstroid" type="Timer" parent="."]
-wait_time = 3.5
+wait_time = 10.0
+autostart = true
 [connection signal="timeout" from="SendAstroid" to="." method="_on_SendAstroid_timeout"]
