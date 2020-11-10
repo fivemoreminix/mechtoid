@@ -7,7 +7,7 @@
 [ext_resource path="res://SFX/missile_flying_lower_pitch.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.45939, 32.3555 )
+extents = Vector2( 9.39083, 25.8257 )
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.71313, 0.0, 0, 0 ]
@@ -23,10 +23,12 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 34.48
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 8.0
-scale_random = 0.65
+tangential_accel = 54.26
+scale = 0.06
 scale_curve = SubResource( 3 )
-color = Color( 1, 1, 1, 0.572549 )
+color = Color( 0.337255, 0.960784, 0.27451, 0.454902 )
+hue_variation = 0.1
+hue_variation_random = 1.0
 
 [node name="HumanMissile" type="CollisionShape2D"]
 rotation = 1.57079
