@@ -2,7 +2,7 @@ extends Node2D
 
 onready var positions = $Positions
 
-export var max_astroids_to_send = 6
+export var max_astroids_to_send = 3
 export var min_astroids_to_send = 2
 
 var scene = preload("res://assets/scenes/Astroid.tscn")
