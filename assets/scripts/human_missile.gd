@@ -1,6 +1,6 @@
 extends CollisionShape2D
 
-const TURN_SPEED = 3
+const TURN_SPEED = 2
 const MAX_SPEED = 1000.0
 const INACCURACY_PER_BOUNCE = 50 # In pixels
 const MARGINS = 100 # edges of the screen we will not allow target_pos to be
