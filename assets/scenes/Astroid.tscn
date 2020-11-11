@@ -12,7 +12,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.13674
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "Pop_out"
 length = 0.6
 tracks/0/type = "value"
@@ -42,7 +42,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "popup"
-length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
@@ -50,7 +49,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
@@ -67,16 +66,18 @@ torque = 2.45
 deflection_power = -1.2
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+disabled = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "popup"
-anims/Pop_out = SubResource( 4 )
+anims/Pop_out = SubResource( 2 )
 anims/popup = SubResource( 3 )
 
 [node name="Pop_out" type="Timer" parent="."]

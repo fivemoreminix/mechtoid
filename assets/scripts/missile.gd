@@ -79,11 +79,14 @@ func deflected(force: float) -> void:
 # Animation needed for the explosion
 func exploision():
 	set_physics_process(false) # to stop the missile from moving 
+	play_sfx()
 	$Destroyed.play()
 	yield($Destroyed, "finished")
 	queue_free()
 
-
+func play_sfx():
+	$Exploision/Fire.set_emitting(true)
+	$Exploision/Smoke.set_emitting(true)
 
 
 func _on_Missile_area_entered(area):
