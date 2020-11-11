@@ -8,6 +8,7 @@ const OPTIONS = [
 	{"tex": "res://assets/Missiles/alien_misssile.png", "scene": "res://assets/scenes/missiles/AlienMissile.tscn", "time": 5.0},
 ]
 
+var difficulty := "medium"
 var sounds: bool = true # Whether the game should play sounds
 var music: bool = true # Whether the game should play music
 var fullscreen: bool = false setget set_fullscreen
