@@ -67,7 +67,12 @@ func _on_ItemsBox_ready() -> void:
 	for item_slot in sbox.get_children():
 		item_slot.set_disabled(true)
 	# Insert the missile at option 1 for our kind of player
-	sbox.new_slot(0, 0 if kind == "human" else 1) # ... Just see ItemsBox.new_slot
+	sbox.new_slot(0, get_kind_missile_option_index()) # ... Just see ItemsBox.new_slot
+
+
+# See ItemsBox.new_slot and Globals.OPTIONS
+func get_kind_missile_option_index() -> int:
+	return 0 if kind == "human" else 1
 
 
 var used_first_missile = false
@@ -115,6 +120,13 @@ func _physics_process(delta):
 func move(m: Vector2, delta: float) -> void:
 	# Ease actual move speed toward motion out of max move speed
 	var target_speed = m * Vector2(MOVE_SPEED, MOVE_SPEED)
+	
+	# Enforce boundaries
+	if not can_move_up:
+		target_speed.y = max(0, target_speed.y)
+	if not can_move_down:
+		target_speed.y = min(0, target_speed.y)
+	
 	motion = Vector2(
 		lerp(motion.x, target_speed.x, acceleration),
 		lerp(motion.y, target_speed.y, acceleration)
