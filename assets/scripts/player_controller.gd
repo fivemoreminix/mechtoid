@@ -176,13 +176,16 @@ func appl_energy_damage(amount):
 func apply_damage(amount):
 	_set_health(health - amount)
 
-
+func play_sfx():
+	$Exploision/Fire.set_emitting(true)
+	$Exploision/Smoke.set_emitting(true)
 # TODO things to do before the player dies like animations scoring points and so ....
 func die():
+	play_sfx()
+	$Sprite.hide()
 	$SFX/Destroyed.play()
 	yield($SFX/Destroyed, "finished")
-	print_debug("DEAD")
-	#queue_free()
+	queue_free()
 
 
 func _set_health(value):

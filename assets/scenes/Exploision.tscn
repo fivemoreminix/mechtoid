@@ -12,7 +12,7 @@ _data = [ Vector2( 0, 200 ), 0.0, 580.504, 0, 0, Vector2( 0.992, -80.9091 ), 476
 curve = SubResource( 1 )
 
 [sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0.511364 ), 0.0, 1.5625, 0, 0, Vector2( 1, 0 ), 1.20243, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 1.5625, 0, 0, Vector2( 1, 0 ), 1.20243, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=4]
 curve = SubResource( 3 )
@@ -26,9 +26,11 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 100.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = 100.0
+linear_accel = 200.0
 linear_accel_random = 0.2
 linear_accel_curve = SubResource( 2 )
+scale = 1.5
+scale_random = 0.05
 scale_curve = SubResource( 4 )
 color_ramp = ExtResource( 2 )
 
