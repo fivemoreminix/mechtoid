@@ -8,12 +8,14 @@
 
 [node name="EnergyBar" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
+danger_color_over = Color( 0.992157, 0.556863, 0, 1 )
+danger_color_progress = Color( 0.905882, 0.223529, 0.168627, 1 )
+normal_color_progress = Color( 0.054902, 0.415686, 0.980392, 1 )
 
 [node name="HealthBarUnder" parent="." index="0"]
 texture_under = ExtResource( 4 )
 texture_over = ExtResource( 2 )
 texture_progress = ExtResource( 3 )
-tint_under = Color( 0.0352941, 0.0352941, 0.0352941, 1 )
 tint_progress = Color( 0.992157, 0.556863, 0, 1 )
 
 [node name="HealthBar" parent="." index="1"]

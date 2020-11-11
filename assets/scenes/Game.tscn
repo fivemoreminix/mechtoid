@@ -141,6 +141,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 margin_left = -300.0
 margin_top = 0.0
+danger_color_over = Color( 0.831373, 0.388235, 0, 1 )
+danger_color_progress = Color( 0.545098, 0.0627451, 0, 1 )
+normal_color_progress = Color( 0.941176, 0.0588235, 0.203922, 1 )
 
 [node name="HealthBarUnder" parent="Interface/TextureRect/HealthBarLeftP" index="0"]
 max_value = 0.0
@@ -161,6 +164,9 @@ margin_top = 0.0
 margin_right = 300.0
 grow_horizontal = 0
 rect_scale = Vector2( -1, 1 )
+danger_color_over = Color( 0.831373, 0.388235, 0, 1 )
+danger_color_progress = Color( 0.545098, 0.0627451, 0, 1 )
+normal_color_progress = Color( 0, 0.713726, 0, 1 )
 
 [node name="HealthBarUnder" parent="Interface/TextureRect/HealthBarRightP" index="0"]
 max_value = 0.0
@@ -177,12 +183,22 @@ anchor_right = 0.0
 margin_left = -225.0
 margin_top = 55.0
 
+[node name="HealthBarUnder" parent="Interface/TextureRect/EnergyBarLeft" index="0"]
+tint_progress = Color( 0.992157, 0.556863, 0, 1 )
+
+[node name="HealthBar" parent="Interface/TextureRect/EnergyBarLeft" index="1"]
+tint_over = Color( 0.00392157, 0.00392157, 0.00392157, 1 )
+tint_progress = Color( 0.054902, 0.415686, 0.980392, 1 )
+
 [node name="EnergyBarRight" parent="Interface/TextureRect" instance=ExtResource( 8 )]
 anchor_left = 1.0
 anchor_top = 0.0
 margin_left = 225.0
 margin_top = 55.0
 rect_scale = Vector2( -1, 1 )
+
+[node name="HealthBar" parent="Interface/TextureRect/EnergyBarRight" index="1"]
+tint_over = Color( 0.00392157, 0.00392157, 0.00392157, 1 )
 
 [node name="ItemsBox" parent="Interface" instance=ExtResource( 7 )]
 margin_top = -83.0266

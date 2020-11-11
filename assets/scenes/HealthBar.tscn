@@ -24,6 +24,7 @@ texture_under = ExtResource( 3 )
 texture_over = ExtResource( 2 )
 texture_progress = ExtResource( 1 )
 tint_under = Color( 0.0352941, 0.0352941, 0.0352941, 1 )
+tint_over = Color( 0, 0, 0, 1 )
 tint_progress = Color( 0.819608, 0.788235, 0.623529, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,9 +33,10 @@ __meta__ = {
 [node name="HealthBar" type="TextureProgress" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-value = 8.0
+value = 20.0
 texture_over = ExtResource( 2 )
 texture_progress = ExtResource( 1 )
+tint_over = Color( 0.00392157, 0.00392157, 0.00392157, 1 )
 tint_progress = Color( 0.980392, 0.054902, 0.227451, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
