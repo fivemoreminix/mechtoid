@@ -38,7 +38,6 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("missile"):
-		print("deflecting a missile...")
 		if area.can_deflect():
 			area.deflected($ForceTimer.time_left / $ForceTimer.wait_time)
 			area.rotate(deg2rad(180))

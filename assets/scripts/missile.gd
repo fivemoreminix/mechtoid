@@ -10,16 +10,17 @@ extends Area2D
 # deflected() -> void # let the missile know it got deflected
 
 signal slow_charging_speed(player)
+signal missile_exploded(missile)
 
-export var inner_missile_scene: PackedScene setget set_inner_scene
+export var inner_missile_scene_path: String setget set_inner_scene
 onready var inner: Node
 
-func set_inner_scene(scn: PackedScene) -> void:
-	inner_missile_scene = scn
+func set_inner_scene(scn: String) -> void:
+	inner_missile_scene_path = scn
 	if has_node("InnerMissile"):
 		$InnerMissile.queue_free()
 		
-	var m = inner_missile_scene.instance()
+	var m = load(inner_missile_scene_path).instance()
 	add_child(m)
 	m.name = "InnerMissile"
 	
@@ -62,6 +63,7 @@ func _physics_process(delta) -> void:
 # Returns an amount of damage from 0.0 to 1.0
 # NOTE: Was previously known as "get_damage()"
 func explode() -> float:
+	emit_signal("missile_exploded", self)
 	return inner.explode()
 
 
@@ -90,4 +92,4 @@ func _on_Missile_area_entered(area):
 			emit_signal("slow_charging_speed", area.side)
 		elif area.side == "human":
 			emit_signal("slow_charging_speed", area.side)
-		inner.explode()
+		explode()
