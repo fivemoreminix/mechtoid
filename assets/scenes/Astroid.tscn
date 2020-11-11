@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/scripts/Normal_astroid.gd" type="Script" id=1]
 [ext_resource path="res://assets/Astroids/g9796.png" type="Texture" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://assets/Astroids/g9781.png" type="Texture" id=5]
 [ext_resource path="res://assets/Astroids/g9806.png" type="Texture" id=6]
 [ext_resource path="res://assets/Astroids/g9801.png" type="Texture" id=7]
-[ext_resource path="res://SFX/robot_destroyed.wav" type="AudioStream" id=8]
+[ext_resource path="res://SFX/asteroid_disappear.wav" type="AudioStream" id=8]
+[ext_resource path="res://SFX/asteroid_appear.wav" type="AudioStream" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.13674
@@ -83,8 +84,14 @@ autostart = true
 
 [node name="Destroyed" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
-volume_db = 5.0
-pitch_scale = 0.5
+volume_db = -3.0
+pitch_scale = 2.01
 attenuation = 0.466516
+
+[node name="Apear" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -3.0
+pitch_scale = 1.22
+autoplay = true
 [connection signal="area_entered" from="." to="." method="_on_Astroid_area_entered"]
 [connection signal="timeout" from="Pop_out" to="." method="_on_Pop_out_timeout"]
