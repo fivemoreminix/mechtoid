@@ -35,6 +35,7 @@ max_health = 450.0
 max_energy = 70.0
 
 [node name="AIPlayerController" parent="LeftPlayer" instance=ExtResource( 5 )]
+items_box_path = NodePath("../../Interface/ItemsBox")
 
 [node name="LeftPlayer2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1237, 336 )

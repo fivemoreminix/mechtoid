@@ -67,7 +67,12 @@ func _on_ItemsBox_ready() -> void:
 	for item_slot in sbox.get_children():
 		item_slot.set_disabled(true)
 	# Insert the missile at option 1 for our kind of player
-	sbox.new_slot(0, 0 if kind == "human" else 1) # ... Just see ItemsBox.new_slot
+	sbox.new_slot(0, get_kind_missile_option_index()) # ... Just see ItemsBox.new_slot
+
+
+# See ItemsBox.new_slot and Globals.OPTIONS
+func get_kind_missile_option_index() -> int:
+	return 0 if kind == "human" else 1
 
 
 var used_first_missile = false

@@ -1,13 +1,6 @@
 tool
 extends Panel
 
-# After adding or changing options here,
-# please update the script in ItemsBox.
-const OPTIONS = [
-	{"tex": "res://assets/Missiles/missile.png", "scene": "res://assets/scenes/missiles/HumanMissile.tscn", "time": 5.0},
-	{"tex": "res://assets/Missiles/alien_misssile.png", "scene": "res://assets/scenes/missiles/AlienMissile.tscn", "time": 5.0},
-]
-
 # Named in the order of OPTIONS
 export(int, "Human Missile", "Alien Missile") var option setget set_option
 export var disabled = false setget set_disabled
@@ -29,11 +22,11 @@ func set_disabled(val: bool) -> void:
 
 func set_option(opt: int) -> void:
 	option = opt
-	$TextureRect.texture = load(OPTIONS[opt]["tex"])
+	$TextureRect.texture = load(Globals.OPTIONS[opt]["tex"])
 
 
 func get_option_scene_path() -> String:
-	return OPTIONS[option]["scene"]
+	return Globals.OPTIONS[option]["scene"]
 
 
 func ready_to_use() -> bool:
@@ -41,7 +34,7 @@ func ready_to_use() -> bool:
 
 
 func start_timer() -> void:
-	$Timer.start(OPTIONS[option]["time"])
+	$Timer.start(Globals.OPTIONS[option]["time"])
 	set_process(true)
 
 

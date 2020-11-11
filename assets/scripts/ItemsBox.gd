@@ -32,5 +32,5 @@ func use(idx: int):
 	if slot == null: return null
 	if slot.ready_to_use():
 		slot.start_timer()
-		emit_signal("item_used", idx, slot.OPTIONS[slot.option])
+		emit_signal("item_used", idx, Globals.OPTIONS[slot.option])
 		return slot.get_option_scene_path()

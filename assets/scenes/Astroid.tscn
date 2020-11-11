@@ -12,7 +12,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.13674
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "Pop_out"
 length = 0.6
 tracks/0/type = "value"
@@ -76,7 +76,7 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "popup"
-anims/Pop_out = SubResource( 4 )
+anims/Pop_out = SubResource( 2 )
 anims/popup = SubResource( 3 )
 
 [node name="Pop_out" type="Timer" parent="."]
