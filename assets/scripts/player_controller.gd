@@ -222,7 +222,6 @@ func _on_astroid_hit_station(player, astroid_damage):
 
 
 func _on_missile_exploded(missile: Node) -> void:
-	print_debug("missile exploded")
 	var sbox = get_node(ui_items_box_node)
 	# Re-enable a missile option after it has exploded
 	for item_slot in sbox.get_children():
