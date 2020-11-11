@@ -29,7 +29,6 @@ script = ExtResource( 15 )
 
 [node name="LeftPlayer" parent="." instance=ExtResource( 1 )]
 position = Vector2( 90, 360 )
-kind = "Human"
 is_ai_controlled = true
 max_health = 450.0
 max_energy = 70.0
@@ -183,22 +182,12 @@ anchor_right = 0.0
 margin_left = -225.0
 margin_top = 55.0
 
-[node name="HealthBarUnder" parent="Interface/TextureRect/EnergyBarLeft" index="0"]
-tint_progress = Color( 0.992157, 0.556863, 0, 1 )
-
-[node name="HealthBar" parent="Interface/TextureRect/EnergyBarLeft" index="1"]
-tint_over = Color( 0.00392157, 0.00392157, 0.00392157, 1 )
-tint_progress = Color( 0.054902, 0.415686, 0.980392, 1 )
-
 [node name="EnergyBarRight" parent="Interface/TextureRect" instance=ExtResource( 8 )]
 anchor_left = 1.0
 anchor_top = 0.0
 margin_left = 225.0
 margin_top = 55.0
 rect_scale = Vector2( -1, 1 )
-
-[node name="HealthBar" parent="Interface/TextureRect/EnergyBarRight" index="1"]
-tint_over = Color( 0.00392157, 0.00392157, 0.00392157, 1 )
 
 [node name="ItemsBox" parent="Interface" instance=ExtResource( 7 )]
 margin_top = -83.0266

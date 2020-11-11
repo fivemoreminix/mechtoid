@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Missile",
+"language": "GDScript",
+"path": "res://assets/scripts/missile.gd"
+} ]
 _global_script_class_icons={
-
+"Missile": ""
 }
 
 [application]
