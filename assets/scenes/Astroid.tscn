@@ -71,7 +71,6 @@ texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-disabled = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 

@@ -36,7 +36,8 @@ func init():
 	
 	 
 
-func deflect():
+func deflect(_deflection_power = deflection_power):
+	deflection_power = _deflection_power
 	direction *= deflection_power
 
 
@@ -55,7 +56,7 @@ func _on_Pop_out_timeout():
 
 func _on_Astroid_area_entered(area):
 	if area.is_in_group("astroids"):
-		deflect()
+		deflect(-0.7)
 	if area.is_in_group("station"):
 		get_tree().call_group("player", "_on_astroid_hit_station", area.side, astroid_damage)
 		_on_Pop_out_timeout()
