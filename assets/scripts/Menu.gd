@@ -21,7 +21,6 @@ func _process(delta: float) -> void:
 
 
 func _on_Menu_visibility_changed() -> void:
-	print("visibility changed for menu: " + str(visible))
 	if pause_game_on_visible:
 		get_tree().paused = visible
 
