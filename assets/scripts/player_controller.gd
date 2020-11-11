@@ -60,6 +60,7 @@ func _ready():
 		call_deferred("_on_ItemsBox_ready")
 		get_node(ui_items_box_node).connect("item_used", self, "_on_ItemsBox_item_used")
 
+
 func _on_ItemsBox_ready() -> void:
 	var sbox = get_node(ui_items_box_node)
 	# Disable every other missile option
@@ -68,6 +69,7 @@ func _on_ItemsBox_ready() -> void:
 	# Insert the missile at option 1 for our kind of player
 	sbox.new_slot(0, 0 if kind == "human" else 1) # ... Just see ItemsBox.new_slot
 
+
 var used_first_missile = false
 func _on_ItemsBox_item_used(idx, item_data) -> void:
 	var sbox = get_node(ui_items_box_node)
@@ -75,14 +77,18 @@ func _on_ItemsBox_item_used(idx, item_data) -> void:
 		for item_slot in sbox.get_children():
 			item_slot.set_disabled(false) # Re-enable all missile options
 
+
 func _input(event: InputEvent) -> void:
 	if is_ai_controlled: return
 	if event is InputEventKey and event.pressed and not event.echo:
 		var sbox = get_node(ui_items_box_node)
 		if event.scancode >= 48 and event.scancode <= 57: # Within KEY_0 to KEY_9
-			var missile_scn_path = sbox.use(event.scancode - 48 - 1)
+			var index = event.scancode - 48 - 1
+			var missile_scn_path = sbox.use(index)
 			if missile_scn_path != null: # User entered an invalid option otherwise ...
-				shoot_missile(missile_scn_path)
+				shoot_missile(missile_scn_path) # Spawn that missile, connect signals
+				sbox.get_child(index).set_disabled(true) # Don't enable it until it explodes
+
 
 func _process(delta):
 	if not is_ai_controlled:
@@ -90,8 +96,6 @@ func _process(delta):
 			$Shield.set_shield_enabled(true)
 		if Input.is_action_just_released("shield"):
 			$Shield.set_shield_enabled(false)
-
-
 
 
 func _physics_process(delta):
@@ -141,13 +145,13 @@ func get_opponent_node():
 
 func shoot_missile(missile_scn_path: String):
 	var m = missile.instance()
-	m.set_inner_scene(load(missile_scn_path))
+	m.set_inner_scene(missile_scn_path)
 	m.set_owner(self)
 	m.target_node = get_opponent_node()
 	get_tree().root.add_child(m)
 	m.global_position = global_position
 	m.look_at($MissileSpawn.global_position)
-#	m.look_at(m.to_global(Vector2.LEFT if facing_opposite else Vector2.RIGHT))
+	m.connect("missile_exploded", self, "_on_missile_exploded")
 
 
 func _on_area_entered(area):
@@ -164,11 +168,14 @@ func _on_Player_area_exited(area):
 	if area.is_in_group("boundary"): # If we left a boundary...
 		on_boundary(area, false)
 
+
 func appl_energy_damage(amount):
 	_set_energy(energy - amount)
 
+
 func apply_damage(amount):
 	_set_health(health - amount)
+
 
 # TODO things to do before the player dies like animations scoring points and so ....
 func die():
@@ -188,6 +195,7 @@ func _set_health(value):
 			die() 
 			emit_signal("killed")
 
+
 func _set_energy(value):
 	var prev_energy = energy
 	energy = clamp(value, 0, max_energy)
@@ -195,6 +203,7 @@ func _set_energy(value):
 		emit_signal("energy_updated", energy)
 		if energy == 0:
 			emit_signal("no_energy")
+
 
 func _on_slow_charging_speed(player):
 	if player.to_lower() == kind.to_lower():
@@ -212,3 +221,12 @@ func _on_astroid_hit_station(player, astroid_damage):
 		appl_energy_damage(astroid_damage / 3)
 
 
+func _on_missile_exploded(missile: Node) -> void:
+	print_debug("missile exploded")
+	var sbox = get_node(ui_items_box_node)
+	# Re-enable a missile option after it has exploded
+	for item_slot in sbox.get_children():
+		# If the exploded missile is the same type as the slot option
+		if item_slot.get_option_scene_path() == missile.inner_missile_scene_path:
+			item_slot.set_disabled(false) # Re-enable it
+			break
