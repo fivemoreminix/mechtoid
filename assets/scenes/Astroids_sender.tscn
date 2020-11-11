@@ -8,22 +8,13 @@ script = ExtResource( 1 )
 [node name="Positions" type="Node2D" parent="."]
 
 [node name="AstroidPos01" type="Position2D" parent="Positions"]
-position = Vector2( 599.395, 69.5926 )
+position = Vector2( 693.782, 97.9088 )
 
 [node name="AstroidPos02" type="Position2D" parent="Positions"]
-position = Vector2( 518.577, 271.636 )
+position = Vector2( 378.884, 258.422 )
 
 [node name="AstroidPos03" type="Position2D" parent="Positions"]
-position = Vector2( 633.069, 374.902 )
-
-[node name="AstroidPos04" type="Position2D" parent="Positions"]
-position = Vector2( 532.047, 475.924 )
-
-[node name="AstroidPos05" type="Position2D" parent="Positions"]
-position = Vector2( 635.313, 550.006 )
-
-[node name="AstroidPos06" type="Position2D" parent="Positions"]
-position = Vector2( 550.006, 673.477 )
+position = Vector2( 644.395, 514.595 )
 
 [node name="SendAstroid" type="Timer" parent="."]
 wait_time = 10.0

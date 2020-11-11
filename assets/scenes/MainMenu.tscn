@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/scenes/Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/graphics/stars.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/background.png" type="Texture" id=3]
+[ext_resource path="res://assets/scenes/Astroids_sender.tscn" type="PackedScene" id=4]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -9,6 +12,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color( 0.141176, 0.137255, 0.156863, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stars" type="TextureRect" parent="Background"]
+self_modulate = Color( 1, 1, 1, 0.517647 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Astroids_sender" parent="." instance=ExtResource( 4 )]
+max_astroids_to_send = 5
+min_astroids_to_send = 4
+
 [node name="Menu" parent="." instance=ExtResource( 1 )]
 pause_game_on_visible = false
 allow_hiding_and_showing_with_escape = false
+
+[editable path="Astroids_sender"]

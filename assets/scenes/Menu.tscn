@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/random-5/random-5-buttons.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/random-5/random-5-headers.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/scripts/Menu.gd" type="Script" id=4]
+[ext_resource path="res://assets/graphics/stars.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -31,8 +32,20 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
+self_modulate = Color( 0.298039, 0.298039, 0.298039, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="Panel"]
+self_modulate = Color( 1, 1, 1, 0.654902 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,58 +87,58 @@ __meta__ = {
 
 [node name="SingleplayerButton" type="Button" parent="Panel/VBoxContainer"]
 margin_right = 236.0
-margin_bottom = 34.0
+margin_bottom = 41.0
 custom_fonts/font = ExtResource( 2 )
 text = "Singleplayer"
 flat = true
 
 [node name="MultiplayerButton" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 41.0
+margin_top = 48.0
 margin_right = 236.0
-margin_bottom = 75.0
+margin_bottom = 89.0
 custom_fonts/font = ExtResource( 2 )
 disabled = true
 text = "Multiplayer"
 flat = true
 
 [node name="SoundsButton" type="CheckButton" parent="Panel/VBoxContainer"]
-margin_top = 82.0
+margin_top = 96.0
 margin_right = 236.0
-margin_bottom = 116.0
+margin_bottom = 137.0
 custom_fonts/font = ExtResource( 2 )
 pressed = true
 text = "Sounds"
 align = 1
 
 [node name="MusicButton" type="CheckButton" parent="Panel/VBoxContainer"]
-margin_top = 123.0
+margin_top = 144.0
 margin_right = 236.0
-margin_bottom = 157.0
+margin_bottom = 185.0
 custom_fonts/font = ExtResource( 2 )
 pressed = true
 text = "Music"
 align = 1
 
 [node name="FullscreenButton" type="CheckButton" parent="Panel/VBoxContainer"]
-margin_top = 164.0
+margin_top = 192.0
 margin_right = 236.0
-margin_bottom = 198.0
+margin_bottom = 233.0
 custom_fonts/font = ExtResource( 2 )
 text = "Fullscreen"
 align = 1
 
 [node name="BorderlessButton" type="CheckButton" parent="Panel/VBoxContainer"]
-margin_top = 205.0
+margin_top = 240.0
 margin_right = 236.0
-margin_bottom = 239.0
+margin_bottom = 281.0
 custom_fonts/font = ExtResource( 2 )
 text = "Borderless"
 align = 1
 
 [node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 246.0
+margin_top = 288.0
 margin_right = 236.0
-margin_bottom = 280.0
+margin_bottom = 329.0
 custom_fonts/font = ExtResource( 2 )
 text = "Quit Game"
 flat = true
