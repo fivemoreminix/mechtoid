@@ -120,6 +120,13 @@ func _physics_process(delta):
 func move(m: Vector2, delta: float) -> void:
 	# Ease actual move speed toward motion out of max move speed
 	var target_speed = m * Vector2(MOVE_SPEED, MOVE_SPEED)
+	
+	# Enforce boundaries
+	if not can_move_up:
+		target_speed.y = max(0, target_speed.y)
+	if not can_move_down:
+		target_speed.y = min(0, target_speed.y)
+	
 	motion = Vector2(
 		lerp(motion.x, target_speed.x, acceleration),
 		lerp(motion.y, target_speed.y, acceleration)

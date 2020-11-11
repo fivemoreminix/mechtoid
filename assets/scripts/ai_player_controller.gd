@@ -8,6 +8,8 @@ onready var dad = get_parent()
 onready var shield = dad.get_node("Shield")
 # An Array of Dictionaries
 onready var internal_items_box: Array = get_items_box_items()
+onready var max_dist_sqr_to_use_shield = 8000 if difficulty == Difficulty.hard else 100000
+
 
 func get_items_box_items() -> Array:
 	var arr = []
@@ -33,20 +35,27 @@ func _process(delta: float) -> void:
 		var closest_missile = get_closest_node2d_in_array(incoming_missiles)
 		var closest_asteroid = get_closest_node2d_in_array(incoming_asteroids)
 		
-		# Step 2: Align our position to be ready to receive said missile:
+		# Step 2 (& 3): Align our position to be ready to receive said missile:
+		# 3: Use (or prepare) shield
 		if closest_missile != null: # Always prefer missiles over asteroids
 			move_to_global_y_pos(closest_missile.global_position.y)
+			use_the_shield_when_ready(closest_missile)
 		else:
 			move_to_global_y_pos(closest_asteroid.global_position.y)
-		
-		# Step 3: Keep our shield going:
-		if not shield.get_shield_enabled():
-			
+			use_the_shield_when_ready(closest_asteroid)
+	else:
+		if shield.get_shield_enabled():
+			shield.set_shield_enabled(false)
+
+
+func use_the_shield_when_ready(on: Node2D) -> void:
+	# When `on` is within a safe range to use the shield ...
+	if dad.global_position.distance_squared_to(on.global_position) <= max_dist_sqr_to_use_shield:
+		if not shield.get_shield_enabled(): # Enable the shield if not already enabled
 			shield.set_shield_enabled(true)
 	else:
 		if shield.get_shield_enabled():
-			
-			shield.set_shield_enabled(false)
+			shield.set_shield_enabled(false) # Stop using shield
 
 
 func get_incoming_missiles() -> Array:
