@@ -8,7 +8,11 @@ onready var dad = get_parent()
 onready var shield = dad.get_node("Shield")
 # An Array of Dictionaries
 onready var internal_items_box: Array = get_items_box_items()
-onready var max_dist_sqr_to_use_shield = 8000 if difficulty == Difficulty.hard else 100000
+onready var max_dist_sqr_to_use_shield = 10000 if difficulty == Difficulty.hard else 60000
+onready var max_reaction_delay = 0.4 if difficulty == Difficulty.hard else 0.9
+
+var previous_target = null # Node2D or null
+var can_move: bool = false
 
 
 func get_items_box_items() -> Array:
@@ -35,16 +39,24 @@ func _process(delta: float) -> void:
 		var closest_missile = get_closest_node2d_in_array(incoming_missiles)
 		var closest_asteroid = get_closest_node2d_in_array(incoming_asteroids)
 		
-		# Step 2 (& 3): Align our position to be ready to receive said missile:
-		# 3: Use (or prepare) shield
-		if closest_missile != null: # Always prefer missiles over asteroids
-			move_to_global_y_pos(closest_missile.global_position.y)
-			use_the_shield_when_ready(closest_missile)
-		else:
-			move_to_global_y_pos(closest_asteroid.global_position.y)
-			use_the_shield_when_ready(closest_asteroid)
-	else:
-		if shield.get_shield_enabled():
+		# Step 2: Determine our target:
+		# Always prefer missiles over asteroids
+		var target = closest_missile if closest_missile != null else closest_asteroid
+		
+		# Step 3: Move there
+		if target != previous_target: # If we're moving somewhere new,
+			previous_target = target
+			can_move = false # We cannot move UNTIL $MoveDelay timeout
+			$MoveDelay.start(rand_range(0.1, max_reaction_delay))
+		
+		if can_move:
+			move_to_global_y_pos(target.global_position.y)
+		
+		# Step 4: Use (or prepare) shield
+		use_the_shield_when_ready(target)
+	else: # When we have nothing to do ...
+		previous_target = null # We have no target
+		if shield.get_shield_enabled(): # Stop using the shield if we are
 			shield.set_shield_enabled(false)
 
 
@@ -67,6 +79,7 @@ func get_incoming_missiles() -> Array:
 
 
 func get_incoming_asteroids() -> Array:
+	# TODO: ignore asteroids out of reach or behind us
 	var out = []
 	for asteroid in get_tree().get_nodes_in_group("astroids"):
 		if asteroid.direction < 0:
@@ -97,3 +110,7 @@ func move_to_global_y_pos(y: int) -> void:
 
 func _on_Shield_deflected_missile(missile) -> void:
 	pass
+
+
+func _on_MoveDelay_timeout() -> void:
+	can_move = true # Allow movement when the $MoveDelay is finished
