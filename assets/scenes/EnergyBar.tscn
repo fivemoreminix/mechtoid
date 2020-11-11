@@ -11,6 +11,7 @@ script = ExtResource( 5 )
 danger_color_over = Color( 0.992157, 0.556863, 0, 1 )
 danger_color_progress = Color( 0.905882, 0.223529, 0.168627, 1 )
 normal_color_progress = Color( 0.054902, 0.415686, 0.980392, 1 )
+recharging_color = Color( 0.105882, 0.980392, 0.054902, 1 )
 
 [node name="HealthBarUnder" parent="." index="0"]
 texture_under = ExtResource( 4 )

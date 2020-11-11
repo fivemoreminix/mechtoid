@@ -12,13 +12,15 @@ export (Color) var normal_color_over = Color()
 export (Color) var danger_color_progress = Color()
 export (Color) var normal_color_progress = Color()
 
+export (Color) var recharging_color = Color()
+
 export (float,0 , 1, 0.05) var danger_zone = 0.2
 
 
 func assign_energy_color(energy):
 	#wait till enegry is full again 
 	if no_energy:
-		energy_bar.tint_progress = danger_color_progress
+		energy_bar.tint_progress = recharging_color
 		energy_bar.tint_over = danger_color_over
 		if energy == default_max_value:
 			no_energy = false
