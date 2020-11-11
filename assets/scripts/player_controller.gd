@@ -75,6 +75,11 @@ func get_kind_missile_option_index() -> int:
 	return 0 if kind == "human" else 1
 
 
+# Returns "left" if player is on the left side of the screen, or "right" on the right side.
+func get_side() -> String:
+	return "left" if transform.basis_xform(Vector2.RIGHT).x > 0.0 else "right"
+
+
 var used_first_missile = false
 func _on_ItemsBox_item_used(idx, item_data) -> void:
 	var sbox = get_node(ui_items_box_node)

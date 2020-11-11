@@ -5,6 +5,7 @@ export(Difficulty) var difficulty = Difficulty.medium
 export var items_box_path: NodePath
 
 onready var dad = get_parent()
+onready var dad_side = dad.get_side()
 onready var shield = dad.get_node("Shield")
 # An Array of Dictionaries
 onready var internal_items_box: Array = get_items_box_items()
@@ -79,11 +80,20 @@ func get_incoming_missiles() -> Array:
 
 
 func get_incoming_asteroids() -> Array:
-	# TODO: ignore asteroids out of reach or behind us
 	var out = []
 	for asteroid in get_tree().get_nodes_in_group("astroids"):
-		if asteroid.direction < 0:
+		var inbound = false # Whether the asteroid is coming to us
+		if dad_side == "left": # If we're on the left side of the screen ...
+			# Only consider an asteroid "incoming" when it is going our direction and not outide screen
+			inbound = asteroid.direction < 0 and asteroid.global_position.x > 0.0
+		else: # Or the right side ...
+			inbound = asteroid.direction > 0 and asteroid.global_position.x <= dad.global_position.x
+		# And within vertical screen area
+		inbound = inbound and asteroid.global_position.y >= 0.0 and asteroid.global_position.y <= get_viewport().size.y
+		
+		if inbound:
 			out.append(asteroid)
+	
 	return out
 
 
