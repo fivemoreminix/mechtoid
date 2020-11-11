@@ -157,19 +157,22 @@ func on_boundary(area: Node, entering: bool) -> void:
 func get_opponent_node():
 	for player in get_tree().get_nodes_in_group("player"):
 		if player != self: return player
-	assert(false)
+	return null # No player could be found
 
 
-func shoot_missile(missile_scn_path: String) -> Missile:
-	var m = missile.instance()
-	m.set_inner_scene(missile_scn_path)
-	m.set_owner(self)
-	m.target_node = get_opponent_node()
-	get_tree().root.add_child(m)
-	m.global_position = global_position
-	m.look_at($MissileSpawn.global_position)
-	m.connect("missile_exploded", self, "_on_missile_exploded")
-	return m
+# Will return the Missile fired if fired, or null otherwise
+func shoot_missile(missile_scn_path: String):
+	var opponent = get_opponent_node()
+	if opponent != null:
+		var m = missile.instance()
+		m.set_inner_scene(missile_scn_path)
+		m.set_owner(self)
+		m.target_node = opponent
+		get_tree().root.add_child(m)
+		m.global_position = global_position
+		m.look_at($MissileSpawn.global_position)
+		m.connect("missile_exploded", self, "_on_missile_exploded")
+		return m
 
 
 func _on_area_entered(area):
