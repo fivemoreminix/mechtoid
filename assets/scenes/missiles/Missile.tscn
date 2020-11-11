@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/scripts/missile.gd" type="Script" id=1]
+[ext_resource path="res://assets/scenes/Exploision.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SFX/robot_destroyed.wav" type="AudioStream" id=3]
 
 [node name="Missile" type="Area2D" groups=[
@@ -13,4 +14,8 @@ script = ExtResource( 1 )
 [node name="Destroyed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 pitch_scale = 2.74
+
+[node name="Exploision" parent="." instance=ExtResource( 2 )]
 [connection signal="area_entered" from="." to="." method="_on_Missile_area_entered"]
+
+[editable path="Exploision"]
