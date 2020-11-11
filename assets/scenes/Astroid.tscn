@@ -59,7 +59,7 @@ tracks/0/keys = {
 "astroids",
 ]]
 collision_layer = 1024
-collision_mask = 1843
+collision_mask = 819
 script = ExtResource( 1 )
 astroids_textures = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ) ]
 torque = 2.45
