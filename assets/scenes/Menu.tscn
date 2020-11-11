@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/random-5/random-5-buttons.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/random-5/random-5-headers.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/scripts/Menu.gd" type="Script" id=4]
-[ext_resource path="res://assets/graphics/stars.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -35,17 +34,6 @@ __meta__ = {
 self_modulate = Color( 0.298039, 0.298039, 0.298039, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="TextureRect" parent="Panel"]
-self_modulate = Color( 1, 1, 1, 0.654902 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -88,6 +76,7 @@ __meta__ = {
 [node name="SingleplayerButton" type="Button" parent="Panel/VBoxContainer"]
 margin_right = 236.0
 margin_bottom = 41.0
+hint_tooltip = "Take on the AI robot"
 custom_fonts/font = ExtResource( 2 )
 text = "Singleplayer"
 flat = true
@@ -152,10 +141,10 @@ margin_top = -62.0
 margin_right = -14.0
 custom_styles/normal = SubResource( 2 )
 bbcode_enabled = true
-bbcode_text = "[color=green]A game by[/color] Luke Wilson [color=green]and[/color] Ayman Lezhar
+bbcode_text = "[color=green]A game by[/color] Luke Wilson [color=green]and[/color] Ayman Lezhar [color=green]and[/color] DimX
 
 [url=https://github.com/codemessiah/space-tennis-game]Open source[/url] and GPL v3 licensed"
-text = "A game by Luke Wilson and Ayman Lezhar
+text = "A game by Luke Wilson and Ayman Lezhar and DimX
 
 Open source and GPL v3 licensed"
 __meta__ = {
