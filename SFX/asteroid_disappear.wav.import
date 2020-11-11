@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/asteroid_disappear.wav-67a810be8b9e52859d9e21a446dc23ed.sample"
+
+[deps]
+
+source_file="res://SFX/asteroid_disappear.wav"
+dest_files=[ "res://.import/asteroid_disappear.wav-67a810be8b9e52859d9e21a446dc23ed.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

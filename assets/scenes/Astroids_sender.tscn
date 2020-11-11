@@ -16,6 +16,9 @@ position = Vector2( 378.884, 258.422 )
 [node name="AstroidPos03" type="Position2D" parent="Positions"]
 position = Vector2( 644.395, 514.595 )
 
+[node name="AstroidPos04" type="Position2D" parent="Positions"]
+position = Vector2( 814.292, 299.392 )
+
 [node name="SendAstroid" type="Timer" parent="."]
 wait_time = 14.0
 autostart = true
