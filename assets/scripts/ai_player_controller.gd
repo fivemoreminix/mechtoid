@@ -72,9 +72,10 @@ func _process(delta: float) -> void:
 func fire_missile() -> void:
 	if can_fire_missile(): # If we can fire a missile ...
 		var missile = dad.shoot_missile(missile_option_data["scene"])
-		missile_still_alive = true
-		# We can spawn another missile after this signal is emitted:
-		missile.connect("missile_exploded", self, "_on_missile_exploded")
+		if missile != null: # If the missile actually got fired ...
+			missile_still_alive = true
+			# We can spawn another missile after this signal is emitted:
+			missile.connect("missile_exploded", self, "_on_missile_exploded")
 
 func can_fire_missile() -> bool:
 	return $SpawnMissileTimer.time_left <= 0.0 and not missile_still_alive

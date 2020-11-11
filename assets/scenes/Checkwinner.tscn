@@ -1,10 +1,22 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/graphics/stars.png" type="Texture" id=1]
 [ext_resource path="res://assets/theme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/fonts/random-5/random-5-buttons.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/fonts/random-5/Random5Bold-ALGpM.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/scripts/Checkwinner.gd" type="Script" id=5]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	COLOR.a = 1.0 - UV.y + 0.2;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -55,10 +67,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -340.0
-margin_top = -960.0
-margin_right = 260.0
-margin_bottom = -460.0
+margin_left = -300.0
+margin_top = -250.0
+margin_right = 300.0
+margin_bottom = 250.0
 rect_min_size = Vector2( 600, 500 )
 script = ExtResource( 5 )
 __meta__ = {
@@ -66,14 +78,18 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-self_modulate = Color( 0.396078, 0.396078, 0.396078, 1 )
+self_modulate = Color( 0.160784, 0.160784, 0.160784, 1 )
+material = SubResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 44.0
+margin_right = -44.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.698039 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -91,6 +107,7 @@ margin_left = -170.0
 margin_top = 222.0
 margin_right = 170.0
 margin_bottom = 41.0
+hint_tooltip = "Try again"
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Restart"

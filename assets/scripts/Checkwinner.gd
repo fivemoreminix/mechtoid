@@ -12,6 +12,7 @@ func get_winner(player):
 	else:
 		show_winner.text = "You Lose !"
 		$AnimationPlayer.play("In")
+		$Panel/Quit.hint_tooltip = "Aww little baby"
 
 func _ready():
 	hide()
