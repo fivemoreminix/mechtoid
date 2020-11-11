@@ -11,7 +11,7 @@ export var astroid_damage = 20
 
 func _ready():
 	init()
-	randomize()
+
 
 func spin(delta):
 	rotate(torque * direction * delta)
@@ -24,6 +24,7 @@ func _physics_process(delta):
 	spin(delta)
 
 func init():
+	randomize()
 	var random_texture = randi() % astroids_textures.size() # pick a random texture
 	$Sprite.set_texture(astroids_textures[random_texture]) 
 	# get the size of the textture to set collision shape
