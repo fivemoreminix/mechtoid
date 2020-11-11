@@ -4,3 +4,7 @@
 
 [node name="AIPlayerController" type="Node"]
 script = ExtResource( 1 )
+
+[node name="MoveDelay" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="MoveDelay" to="." method="_on_MoveDelay_timeout"]
