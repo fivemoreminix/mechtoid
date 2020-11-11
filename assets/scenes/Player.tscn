@@ -42,7 +42,7 @@ position = Vector2( 0, 8.8185 )
 [node name="Shield" type="Area2D" parent="."]
 position = Vector2( 48, 0 )
 collision_layer = 48
-collision_mask = 1025
+collision_mask = 1037
 script = ExtResource( 4 )
 energy_draining_speed = 20
 
