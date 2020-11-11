@@ -1,4 +1,5 @@
 extends Area2D
+class_name Missile
 
 # This is a pretty fancy script. It acts as an interface to all types of missiles
 # via functions. The child "InnerMissile" must exist and have a script which

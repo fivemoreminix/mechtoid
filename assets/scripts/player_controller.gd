@@ -160,7 +160,7 @@ func get_opponent_node():
 	assert(false)
 
 
-func shoot_missile(missile_scn_path: String):
+func shoot_missile(missile_scn_path: String) -> Missile:
 	var m = missile.instance()
 	m.set_inner_scene(missile_scn_path)
 	m.set_owner(self)
@@ -169,6 +169,7 @@ func shoot_missile(missile_scn_path: String):
 	m.global_position = global_position
 	m.look_at($MissileSpawn.global_position)
 	m.connect("missile_exploded", self, "_on_missile_exploded")
+	return m
 
 
 func _on_area_entered(area):
@@ -242,10 +243,11 @@ func _on_astroid_hit_station(player, astroid_damage):
 
 
 func _on_missile_exploded(missile: Node) -> void:
-	var sbox = get_node(ui_items_box_node)
-	# Re-enable a missile option after it has exploded
-	for item_slot in sbox.get_children():
-		# If the exploded missile is the same type as the slot option
-		if item_slot.get_option_scene_path() == missile.inner_missile_scene_path:
-			item_slot.set_disabled(false) # Re-enable it
-			break
+	if not is_ai_controlled: # FIXME
+		var sbox = get_node(ui_items_box_node)
+		# Re-enable a missile option after it has exploded
+		for item_slot in sbox.get_children():
+			# If the exploded missile is the same type as the slot option
+			if item_slot.get_option_scene_path() == missile.inner_missile_scene_path:
+				item_slot.set_disabled(false) # Re-enable it
+				break

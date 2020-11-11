@@ -7,32 +7,40 @@ export var items_box_path: NodePath
 onready var dad = get_parent()
 onready var dad_side = dad.get_side()
 onready var shield = dad.get_node("Shield")
-# An Array of Dictionaries
-onready var internal_items_box: Array = get_items_box_items()
-onready var max_dist_sqr_to_use_shield = 10000 if difficulty == Difficulty.hard else 60000
-onready var max_reaction_delay = 0.4 if difficulty == Difficulty.hard else 0.9
+
+# CAUTION: due to not thinking ahead, the Interface node has all UI server-wide,
+# so that will need to be fixed before an AI or other player can have actual missile
+# selection. Until then, the AI will only use its missile kind and simulate the timer.
+onready var missile_option_data = Globals.OPTIONS[dad.get_kind_missile_option_index()]
+
+### Behavior Options ###
+
+var max_dist_sqr_to_use_shield = 10000 if difficulty == Difficulty.hard else 60000
+var max_reaction_delay = 0.4 if difficulty == Difficulty.hard else 1.0
+# The chance this AI will fire a missile any given frame when one is available
+var chance_to_fire_missile = 0.01 if difficulty == Difficulty.hard else 0.001 # 0.0 to 1.0
+
+### End Behavior Options ###
 
 var previous_target = null # Node2D or null
 var can_move: bool = false
-
-
-func get_items_box_items() -> Array:
-	var arr = []
-	for item in get_node(items_box_path).get_children():
-		arr += [Globals.OPTIONS[item.option]] # arr becomes an array of dictionaries
-	return arr
+var missile_still_alive: bool = false # Whether a missile we fired is still alive
 
 
 func _ready() -> void:
+	print(dad.get_kind_missile_option_index())
 	assert(dad != null)
 	set_process(true)
 	
 	shield.connect("deflected_missile", self, "_on_Shield_deflected_missile")
-	# Insert our character kind's missile into internal_items_box
-	internal_items_box.insert(0, Globals.OPTIONS[dad.get_kind_missile_option_index()])
 
 
 func _process(delta: float) -> void:
+	# Missile firing:
+	if can_fire_missile():
+		var do_fire = randf() <= chance_to_fire_missile # Fire?
+		if do_fire: fire_missile()
+	
 	var incoming_missiles = get_incoming_missiles()
 	var incoming_asteroids = get_incoming_asteroids()
 	if incoming_missiles.size() > 0 or incoming_asteroids.size() > 0:
@@ -59,6 +67,17 @@ func _process(delta: float) -> void:
 		previous_target = null # We have no target
 		if shield.get_shield_enabled(): # Stop using the shield if we are
 			shield.set_shield_enabled(false)
+
+
+func fire_missile() -> void:
+	if can_fire_missile(): # If we can fire a missile ...
+		var missile = dad.shoot_missile(missile_option_data["scene"])
+		missile_still_alive = true
+		# We can spawn another missile after this signal is emitted:
+		missile.connect("missile_exploded", self, "_on_missile_exploded")
+
+func can_fire_missile() -> bool:
+	return $SpawnMissileTimer.time_left <= 0.0 and not missile_still_alive
 
 
 func use_the_shield_when_ready(on: Node2D) -> void:
@@ -124,3 +143,8 @@ func _on_Shield_deflected_missile(missile) -> void:
 
 func _on_MoveDelay_timeout() -> void:
 	can_move = true # Allow movement when the $MoveDelay is finished
+
+
+func _on_missile_exploded(missile: Missile) -> void:
+	missile_still_alive = false
+	$SpawnMissileTimer.start(missile_option_data["time"])
