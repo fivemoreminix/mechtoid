@@ -16,7 +16,7 @@ onready var missile_option_data = Globals.OPTIONS[dad.get_kind_missile_option_in
 ### Behavior Options ###
 
 var max_dist_sqr_to_use_shield = 10000 if difficulty == Difficulty.hard else 60000
-var max_reaction_delay = 0.4 if difficulty == Difficulty.hard else 0.9
+var max_reaction_delay = 0.4 if difficulty == Difficulty.hard else 1.0
 # The chance this AI will fire a missile any given frame when one is available
 var chance_to_fire_missile = 0.01 if difficulty == Difficulty.hard else 0.001 # 0.0 to 1.0
 
