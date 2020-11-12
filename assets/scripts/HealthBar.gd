@@ -22,7 +22,6 @@ func assign_health_color(health):
 		health_bar.tint_over = normal_color_over
 
 
-
 func _ready():
 	update_max_healthbar(default_max_value)
 
