@@ -3,6 +3,9 @@ extends Control
 export var pause_game_on_visible: bool = true
 export var allow_hiding_and_showing_with_escape: bool = true
 
+onready var sfx_bus_idx := AudioServer.get_bus_index("SFX")
+onready var music_bus_idx := AudioServer.get_bus_index("Music")
+
 
 func _ready() -> void:
 	set_process(true)
@@ -40,10 +43,12 @@ func _on_SingleplayerButton_pressed() -> void:
 
 func _on_SoundsButton_toggled(button_pressed: bool) -> void:
 	Globals.sounds = button_pressed
+	AudioServer.set_bus_volume_db(sfx_bus_idx, 0 if button_pressed else -60)
 
 
 func _on_MusicButton_toggled(button_pressed: bool) -> void:
 	Globals.music = button_pressed
+	AudioServer.set_bus_volume_db(music_bus_idx, 0 if button_pressed else -60)
 
 
 func _on_FullscreenButton_toggled(button_pressed: bool) -> void:
