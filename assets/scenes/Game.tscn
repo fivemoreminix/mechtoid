@@ -207,6 +207,7 @@ margin_bottom = -433.873
 stream = ExtResource( 12 )
 volume_db = -5.0
 autoplay = true
+bus = "Music"
 [connection signal="energy_updated" from="LeftPlayer" to="Interface/TextureRect/EnergyBarLeft" method="_on_LeftPlayer_energy_updated"]
 [connection signal="health_updated" from="LeftPlayer" to="Interface/TextureRect/HealthBarLeftP" method="_on_LeftPlayer_health_updated"]
 [connection signal="killed" from="LeftPlayer" to="." method="_on_LeftPlayer_killed"]

@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/fonts/random-5/Random5Bold-ALGpM.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/scripts/Checkwinner.gd" type="Script" id=5]
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 void fragment() {
@@ -14,10 +14,10 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=3]
 draw_center = false
 border_width_left = 2
 border_width_top = 2
@@ -25,14 +25,13 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.952941, 0.952941, 0.952941, 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 40
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "In"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
 tracks/0/interp = 2
@@ -78,7 +77,7 @@ __meta__ = {
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color( 0.160784, 0.160784, 0.160784, 1 )
-material = SubResource( 5 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 44.0
@@ -137,7 +136,7 @@ margin_left = -200.0
 margin_top = 59.0
 margin_right = 200.0
 margin_bottom = 148.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -151,12 +150,12 @@ margin_left = -118.0
 margin_top = -29.5
 margin_right = 118.0
 margin_bottom = 29.5
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "YOU LOSE"
 uppercase = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/In = SubResource( 3 )
+anims/In = SubResource( 5 )
 [connection signal="pressed" from="Panel/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="Panel/Quit" to="." method="_on_Quit_pressed"]

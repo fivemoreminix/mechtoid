@@ -65,21 +65,26 @@ one_shot = true
 
 [node name="ShieldActivated" type="AudioStreamPlayer" parent="Shield/SFX"]
 stream = ExtResource( 7 )
+bus = "SFX"
 
 [node name="ShieldDeactivated" type="AudioStreamPlayer" parent="Shield/SFX"]
 stream = ExtResource( 9 )
+bus = "SFX"
 
 [node name="ShieldHit" type="AudioStreamPlayer" parent="Shield/SFX"]
 stream = ExtResource( 8 )
+bus = "SFX"
 
 [node name="ShieldHitAstroid" type="AudioStreamPlayer" parent="Shield/SFX"]
 stream = ExtResource( 8 )
 pitch_scale = 0.59
+bus = "SFX"
 
 [node name="SFX" type="Node" parent="."]
 
 [node name="Destroyed" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 6 )
+bus = "SFX"
 
 [node name="Exploision" parent="." instance=ExtResource( 10 )]
 position = Vector2( -27.0883, 0 )
